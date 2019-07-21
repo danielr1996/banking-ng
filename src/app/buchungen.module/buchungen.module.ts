@@ -1,8 +1,11 @@
 import {NgModule} from '@angular/core';
-import { BuchungenComponent } from './buchungen/buchungen.component';
-import {Apollo} from 'apollo-angular';
+import {BuchungenComponent} from './components/buchungen/buchungen.component';
+import {CommonsModule} from '../commons.module/commons.module';
 
 @NgModule({
+  imports: [
+    CommonsModule,
+  ],
   exports: [
     BuchungenComponent
   ],

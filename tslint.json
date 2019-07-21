@@ -1,6 +1,19 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "no-any": true,
+    "typedef": [
+      true,
+      "member-variable-declaration",
+      "call-signature",
+      "arrow-call-signature",
+      "parameter",
+      "arrow-parameter",
+      "property-declaration",
+      "variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
+    ],
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
@@ -54,7 +67,7 @@
     ],
     "no-empty": false,
     "no-inferrable-types": [
-      true,
+      false,
       "ignore-params"
     ],
     "no-non-null-assertion": true,

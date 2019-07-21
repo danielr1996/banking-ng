@@ -1,0 +1,19 @@
+<table>
+  <thead>
+  <tr>
+    <th>Betrag</th>
+    <th>Verwendungszweck</th>
+    <th>Buchungstag</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let buchung of buchungen$ | async">
+    <td>{{buchung.betrag | currency:buchung.waehrung}}</td>
+    <td>{{buchung.verwendungszweck}}</td>
+    <td>{{buchung.buchungstag | date:'dd.MM.yyyy'}}</td>
+  </tr>
+  </tbody>
+</table>
+<button (click)="prev$.next()" type="button">Prev</button>
+{{page$ | async}}
+<button (click)="next$.next()" type="button">Next</button>
