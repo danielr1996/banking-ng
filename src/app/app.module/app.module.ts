@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from '../graphql.module/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
-import {BuchungenModule} from '../buchungen.module/buchungen.module';
+import {BuchungenModule} from '../features/buchungen.module/buchungen.module';
+import {SaldoModule} from '../features/saldo.module/saldo.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {BuchungenModule} from '../buchungen.module/buchungen.module';
     BrowserModule,
     GraphQLModule,
     HttpClientModule,
-    BuchungenModule
+    BuchungenModule,
+    SaldoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

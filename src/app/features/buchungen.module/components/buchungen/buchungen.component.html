@@ -1,4 +1,4 @@
-<table>
+<table class="table">
   <thead>
   <tr>
     <th>Betrag</th>
@@ -15,5 +15,5 @@
   </tbody>
 </table>
 <button (click)="prev$.next()" type="button">Prev</button>
-{{page$ | async}}
+{{(page$ | async) }}
 <button (click)="next$.next()" type="button">Next</button>

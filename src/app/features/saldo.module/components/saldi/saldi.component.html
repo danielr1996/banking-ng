@@ -1,0 +1,30 @@
+<!--<svg width="960" height="500">
+  <g transform="translate(40,20)">
+    <g
+      *ngFor="let saldo of saldi$ | async; let i = index">
+      <text
+        transform="rotate(-90)"
+        [attr.y]="40*i"
+        [attr.x]="-200"
+        fill="red"
+        style="text-anchor: end;">{{saldo.betrag}}
+      </text>
+      <rect
+        class="bar"
+        [attr.x]="(10+30) * i"
+        width="30"
+        dy="10px"
+        [attr.y]="500-myScale(saldo.betrag)"
+        [attr.height]="myScale(saldo.betrag)"
+      >
+      </rect>
+
+    </g>
+  </g>
+</svg>-->
+<x-chartist
+  [type]="type"
+  [data]="data$ | async"
+  [options]="options"
+  [events]="events"
+></x-chartist>

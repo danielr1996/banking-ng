@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import {pluck, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Buchung} from '../buchung';
+import {BuchungContainer} from '../buchung-container';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class BuchungenService {
 
   }
 
-  public getBuchungen(page?: number, size?: number): Observable<Buchung[]> {
+  public getBuchungen(page?: number, size?: number): Observable<BuchungContainer> {
     let paramQuery: string = '';
 
     const pageQuery: string = `page: ${page},`;
@@ -27,19 +28,22 @@ export class BuchungenService {
         query: gql`
           {
             buchungen${paramQuery}{
+            totalPages
+            totalElements
+             buchungen{
               id
               verwendungszweck
               betrag
               waehrung
               buchungstag
+             }
             }
           }
         `,
       })
       .valueChanges
       .pipe(
-        pluck('data'),
-        pluck('buchungen'),
+        pluck('data', 'buchungen'),
       );
   }
 }

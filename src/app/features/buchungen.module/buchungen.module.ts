@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BuchungenComponent} from './components/buchungen/buchungen.component';
-import {CommonsModule} from '../commons.module/commons.module';
+import {CommonsModule} from '../../commons.module/commons.module';
 
 @NgModule({
   imports: [
