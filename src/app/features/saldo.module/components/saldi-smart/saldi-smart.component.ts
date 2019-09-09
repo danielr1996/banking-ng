@@ -4,6 +4,7 @@ import {Saldo} from '../../saldo';
 import {merge, Observable, of, Subject} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
 import {BuchungContainer} from '../../../buchungen.module/buchung-container';
+import {SaldiContainer} from "../../saldi-container";
 
 @Component({
   selector: 'app-saldi-smart',
@@ -14,6 +15,8 @@ export class SaldiSmartComponent implements OnInit {
   readonly ITEMS_PER_PAGE: number = 10;
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
+  private totalPages: number;
+  private totalElements: number;
 
   readonly page$: Observable<number> = merge(
     of(0).pipe(
@@ -34,13 +37,19 @@ export class SaldiSmartComponent implements OnInit {
       if (next < 0) {
         next = 0;
       }
+      if (next === this.totalPages) {
+        next = acc;
+      }
       return next;
     })
   );
 
   public saldi$: Observable<Saldo[]> = this.page$.pipe(
     flatMap((page: number) => this.saldoService.getSaldi(page, this.ITEMS_PER_PAGE)),
-    tap(console.log),
+    tap((container: SaldiContainer) => {
+      this.totalPages = container.totalPages;
+      this.totalElements = container.totalElements;
+    }),
     pluck('saldi')
   );
 

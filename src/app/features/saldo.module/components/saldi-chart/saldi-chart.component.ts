@@ -25,7 +25,7 @@ export class SaldiChartComponent implements OnInit {
     axisX: {
       showGrid: false
     },
-    height: 300,
+    height: 250,
     plugins: [
       Chartist.plugins.ctPointLabels(),
     ]
@@ -53,9 +53,8 @@ export class SaldiChartComponent implements OnInit {
   ngOnInit(): void {
     this.data$ = this.saldi$.pipe(
       map((saldi: Saldo[]) => {
-        const lbls: any = saldi.map((saldo: Saldo) => format(new Date(saldo.datum), 'dd.MM.yyyy'));
-        const data: any = saldi.map((saldo: Saldo) => saldo.betrag);
-
+        const lbls: any = saldi.map((saldo: Saldo) => format(new Date(saldo.datum), 'dd.MM.yyyy')).reverse();
+        const data: any = saldi.map((saldo: Saldo) => saldo.betrag).reverse();
         return {
           series: [data],
           labels: lbls
