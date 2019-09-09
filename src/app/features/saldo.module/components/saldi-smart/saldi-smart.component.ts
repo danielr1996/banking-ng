@@ -17,6 +17,7 @@ export class SaldiSmartComponent implements OnInit {
   readonly next$: Subject<number> = new Subject();
   private totalPages: number;
   private totalElements: number;
+  private style: 'table' | 'chart' = 'table';
 
   readonly page$: Observable<number> = merge(
     of(0).pipe(
@@ -59,4 +60,7 @@ export class SaldiSmartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  switch(): void {
+    this.style = this.style === 'table' ? 'chart' : 'table';
+  }
 }

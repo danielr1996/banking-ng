@@ -1,0 +1,14 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Betrag</th>
+    <th>Datum</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let saldo of saldi">
+    <td>{{saldo.betrag | currency:'EUR'}}</td>
+    <td>{{saldo.datum | date:'dd.MM.yyyy'}}</td>
+  </tr>
+  </tbody>
+</table>

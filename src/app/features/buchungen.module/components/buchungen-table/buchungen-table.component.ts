@@ -8,9 +8,6 @@ import {Buchung} from '../../buchung';
 })
 export class BuchungenTableComponent implements OnInit {
   @Input() buchungen: Buchung[];
-  @Input() page: number;
-  @Output() prev: EventEmitter<void> = new EventEmitter();
-  @Output() next: EventEmitter<void> = new EventEmitter();
 
   ngOnInit(): void {
   }

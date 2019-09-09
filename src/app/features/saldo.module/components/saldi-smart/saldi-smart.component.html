@@ -1,6 +1,13 @@
+<button type="button" [ngClass]="{'btn-primary': style==='table', 'btn-secondary':style==='chart'}" class="btn" (click)="switch()">{{style==='table' ? 'Tabelle' : 'Diagram'}}</button>
+
 <app-saldi-chart
+  *ngIf="style==='chart'"
 [saldi$]="saldi$"
-[page]="page$ | async"
-(prev)="prev$.next()"
-(next)="next$.next()"
 ></app-saldi-chart>
+<app-saldi-table
+  *ngIf="style==='table'"
+  [saldi]="saldi$ | async"
+></app-saldi-table>
+<button (click)="prev$.next()" type="button">Prev</button>
+{{(page$ | async ) + 1}}
+<button (click)="next$.next()" type="button">Next</button>

@@ -1,20 +1,20 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ChartEvent, ChartType} from 'ng-chartist';
-import {Saldo} from '../../saldo';
-import {format} from 'date-fns';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {Component, Input, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {ChartEvent, ChartType} from "ng-chartist";
+import {map} from "rxjs/operators";
+import {format} from "date-fns";
 import * as Chartist from 'chartist';
 import 'chartist-plugin-tooltip';
 import 'chartist-plugin-pointlabels';
+import {Buchung} from "../../buchung";
 
 @Component({
-  selector: 'app-saldi-chart',
-  templateUrl: './saldi-chart.component.html',
-  styleUrls: ['./saldi-chart.component.scss']
+  selector: 'app-buchungen-chart',
+  templateUrl: './buchungen-chart.component.html',
+  styleUrls: ['./buchungen-chart.component.scss']
 })
-export class SaldiChartComponent implements OnInit {
-  @Input() saldi$: Observable<Saldo[]>;
+export class BuchungenChartComponent implements OnInit {
+  @Input() buchungen$: Observable<Buchung[]>;
   data$: Observable<{ labels: string[], series: string[][] }>;
   chartType: ChartType = 'Bar';
 
@@ -48,10 +48,10 @@ export class SaldiChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.data$ = this.saldi$.pipe(
-      map((saldi: Saldo[]) => {
-        const lbls: any = saldi.map((saldo: Saldo) => format(new Date(saldo.datum), 'dd.MM.yyyy')).reverse();
-        const data: any = saldi.map((saldo: Saldo) => saldo.betrag).reverse();
+    this.data$ = this.buchungen$.pipe(
+      map((buchungen: Buchung[]) => {
+        const lbls: any = buchungen.map((buchung: Buchung) => format(new Date(buchung.buchungstag), 'dd.MM.yyyy')).reverse();
+        const data: any = buchungen.map((buchung: Buchung) => buchung.betrag).reverse();
         return {
           series: [data],
           labels: lbls
