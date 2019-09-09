@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Betrag</th>
+    <th>Verwendungszweck</th>
+    <th>Buchungstag</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let buchung of buchungen">
+    <td>{{buchung.betrag | currency:buchung.waehrung}}</td>
+    <td>{{buchung.verwendungszweck}}</td>
+    <td>{{buchung.buchungstag | date:'dd.MM.yyyy'}}</td>
+  </tr>
+  </tbody>
+</table>

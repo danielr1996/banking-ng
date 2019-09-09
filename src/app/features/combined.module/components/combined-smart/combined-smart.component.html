@@ -1,0 +1,16 @@
+<button type="button" [ngClass]="{'btn-primary': style==='table', 'btn-secondary':style==='chart'}" class="btn"
+        (click)="switch()">{{style === 'table' ? 'Tabelle' : 'Diagram'}}</button>
+
+<!--<app-combined-table
+  *ngIf="style==='table'"
+  [buchungen]="buchungen$ | async"
+  *ngIf="style==='chart'"
+></app-combined-table>-->
+<app-combined-chart
+  [buchungen$]="buchungen$"
+  [saldi$]="saldi$"
+></app-combined-chart>
+
+<button (click)="prev$.next()" type="button">Prev</button>
+{{(page$ | async) + 1}}
+<button (click)="next$.next()" type="button">Next</button>

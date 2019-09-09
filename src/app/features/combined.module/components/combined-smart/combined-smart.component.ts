@@ -1,17 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {SaldoService} from '../../saldo.service';
-import {Saldo} from '../../saldo';
 import {merge, Observable, of, Subject} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
-import {BuchungContainer} from '../../../buchungen.module/buchung-container';
-import {SaldiContainer} from "../../saldi-container";
+import {Buchung} from "../../../buchungen.module/buchung";
+import {BuchungContainer} from "../../../buchungen.module/buchung-container";
+import {Saldo} from "../../../saldo.module/saldo";
+import {BuchungenService} from "../../../buchungen.module/services/buchungen.service";
+import {SaldoService} from "../../../saldo.module/saldo.service";
 
 @Component({
-  selector: 'app-saldi-smart',
-  templateUrl: './saldi-smart.component.html',
-  styleUrls: ['./saldi-smart.component.scss']
+  selector: 'app-combined-smart',
+  templateUrl: './combined-smart.component.html',
+  styleUrls: ['./combined-smart.component.scss']
 })
-export class SaldiSmartComponent implements OnInit {
+export class CombinedSmartComponent implements OnInit {
   readonly ITEMS_PER_PAGE: number = 10;
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
@@ -45,16 +46,22 @@ export class SaldiSmartComponent implements OnInit {
     })
   );
 
-  public saldi$: Observable<Saldo[]> = this.page$.pipe(
-    flatMap((page: number) => this.saldoService.getSaldi(page, this.ITEMS_PER_PAGE)),
-    tap((container: SaldiContainer) => {
+
+  readonly buchungen$: Observable<Buchung[]> = this.page$.pipe(
+    flatMap((page: number) => this.buchungenService.getBuchungen(page, this.ITEMS_PER_PAGE)),
+    tap((container: BuchungContainer) => {
       this.totalPages = container.totalPages;
       this.totalElements = container.totalElements;
     }),
-    pluck('saldi')
+    pluck('buchungen')
   );
 
-  constructor(private saldoService: SaldoService) {
+  readonly saldi$: Observable<Saldo[]> = this.page$.pipe(
+    flatMap((page: number) => this.saldoService.getSaldi(page, this.ITEMS_PER_PAGE)),
+    pluck('saldi')
+  )
+
+  constructor(private buchungenService: BuchungenService, private saldoService: SaldoService) {
   }
 
   ngOnInit(): void {
@@ -62,9 +69,5 @@ export class SaldiSmartComponent implements OnInit {
 
   switch(): void {
     this.style = this.style === 'table' ? 'chart' : 'table';
-  }
-
-  repeat(n: number): any {
-    return [...Array(n).keys()];
   }
 }
