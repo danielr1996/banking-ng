@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {flatMap, map, mapTo, scan, tap} from 'rxjs/operators';
-import {BuchungenService} from '../../services/buchungen.service';
-import {Buchung} from '../../buchung';
+import { Component, OnInit } from '@angular/core';
 import {merge, Observable, of, Subject} from 'rxjs';
+import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
+import {Buchung} from '../../buchung';
 import {BuchungContainer} from '../../buchung-container';
+import {BuchungenService} from '../../services/buchungen.service';
 
 @Component({
-  selector: 'app-buchungen',
-  templateUrl: './buchungen.component.html',
-  styleUrls: ['./buchungen.component.scss']
+  selector: 'app-buchungen-smart',
+  templateUrl: './buchungen-smart.component.html',
+  styleUrls: ['./buchungen-smart.component.scss']
 })
-export class BuchungenComponent implements OnInit {
+export class BuchungenSmartComponent implements OnInit {
   readonly ITEMS_PER_PAGE: number = 10;
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
@@ -22,7 +22,6 @@ export class BuchungenComponent implements OnInit {
       map((page: number) => {
         const urlParams: any = new URLSearchParams(window.location.search);
         const myParam: string = urlParams.get('page');
-        console.log(myParam);
         if (myParam) {
           page = Number(myParam);
         }
@@ -51,7 +50,7 @@ export class BuchungenComponent implements OnInit {
       this.totalPages = container.totalPages;
       this.totalElements = container.totalElements;
     }),
-    map((container: BuchungContainer) => container.buchungen),
+    pluck('buchungen')
   );
 
   constructor(private buchungenService: BuchungenService) {

@@ -1,15 +1,16 @@
 import {NgModule} from '@angular/core';
-import {BuchungenComponent} from './components/buchungen/buchungen.component';
+import {BuchungenTableComponent} from './components/buchungen-table/buchungen-table.component';
 import {CommonsModule} from '../../commons.module/commons.module';
+import { BuchungenSmartComponent } from './components/buchungen-smart/buchungen-smart.component';
 
 @NgModule({
   imports: [
     CommonsModule,
   ],
   exports: [
-    BuchungenComponent
+    BuchungenSmartComponent
   ],
-  declarations: [BuchungenComponent]
+  declarations: [BuchungenTableComponent, BuchungenSmartComponent]
 })
 export class BuchungenModule {
 }

@@ -1,0 +1,6 @@
+<app-buchungen-table
+[buchungen]="buchungen$ | async"
+[page]="page$ | async"
+(prev)="prev$.next()"
+(next)="next$.next()"
+></app-buchungen-table>

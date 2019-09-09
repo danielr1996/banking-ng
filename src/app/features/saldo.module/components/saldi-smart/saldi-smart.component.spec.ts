@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BuchungenComponent } from './buchungen.component';
+import { SaldiSmartComponent } from './saldi-smart.component';
 
-describe('BuchungenComponent', () => {
-  let component: BuchungenComponent;
-  let fixture: ComponentFixture<BuchungenComponent>;
+describe('SaldiSmartComponent', () => {
+  let component: SaldiSmartComponent;
+  let fixture: ComponentFixture<SaldiSmartComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BuchungenComponent ]
+      declarations: [ SaldiSmartComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BuchungenComponent);
+    fixture = TestBed.createComponent(SaldiSmartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

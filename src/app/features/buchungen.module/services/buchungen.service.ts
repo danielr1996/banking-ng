@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {pluck, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {catchError, pluck, tap} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
 import {Buchung} from '../buchung';
 import {BuchungContainer} from '../buchung-container';
 
@@ -44,6 +44,10 @@ export class BuchungenService {
       .valueChanges
       .pipe(
         pluck('data', 'buchungen'),
+        catchError(err => {
+          console.error('Connection cannot be established');
+          return of(err);
+        })
       );
   }
 }

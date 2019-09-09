@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SaldiComponent } from './saldi.component';
+import { SaldiChartComponent } from './saldi-chart.component';
 
-describe('SaldiComponent', () => {
-  let component: SaldiComponent;
-  let fixture: ComponentFixture<SaldiComponent>;
+describe('SaldiChartComponent', () => {
+  let component: SaldiChartComponent;
+  let fixture: ComponentFixture<SaldiChartComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SaldiComponent ]
+      declarations: [ SaldiChartComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SaldiComponent);
+    fixture = TestBed.createComponent(SaldiChartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

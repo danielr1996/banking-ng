@@ -1,0 +1,6 @@
+<app-saldi-chart
+[saldi$]="saldi$"
+[page]="page$ | async"
+(prev)="prev$.next()"
+(next)="next$.next()"
+></app-saldi-chart>

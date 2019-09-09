@@ -7,13 +7,13 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let buchung of buchungen$ | async">
+  <tr *ngFor="let buchung of buchungen">
     <td>{{buchung.betrag | currency:buchung.waehrung}}</td>
     <td>{{buchung.verwendungszweck}}</td>
     <td>{{buchung.buchungstag | date:'dd.MM.yyyy'}}</td>
   </tr>
   </tbody>
 </table>
-<button (click)="prev$.next()" type="button">Prev</button>
-{{(page$ | async) }}
-<button (click)="next$.next()" type="button">Next</button>
+<button (click)="prev.next()" type="button">Prev</button>
+{{page + 1}}
+<button (click)="next.next()" type="button">Next</button>

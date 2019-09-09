@@ -1,0 +1,9 @@
+<x-chartist
+  [type]="chartType"
+  [data]="data$ | async"
+  [options]="options"
+  [events]="events"
+></x-chartist>
+<button (click)="prev.next()" type="button">Prev</button>
+{{page + 1}}
+<button (click)="next.next()" type="button">Next</button>
