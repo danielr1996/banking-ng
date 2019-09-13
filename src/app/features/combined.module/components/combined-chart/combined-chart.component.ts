@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable, zip} from "rxjs";
-import {ChartEvent, ChartType} from "ng-chartist";
-import {map} from "rxjs/operators";
-import {format} from "date-fns";
 import * as Chartist from 'chartist';
 import 'chartist-plugin-tooltip';
 import 'chartist-plugin-pointlabels';
-import {Buchung} from "../../buchung";
-import {Saldo} from "../../../saldo.module/saldo";
+import {Observable, zip} from 'rxjs';
+import {ChartEvent, ChartType} from 'ng-chartist';
+import {Buchung} from 'src/app/features/buchungen.module/buchung';
+import {Saldo} from 'src/app/features/saldo.module/saldo';
+import {map} from 'rxjs/operators';
+import {format} from 'date-fns';
 
 @Component({
   selector: 'app-combined-chart',
