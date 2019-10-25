@@ -6,6 +6,7 @@ import {GraphQLModule} from '../graphql.module/graphql.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {RefreshModule} from '../features/refresh/refresh.module';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     GraphQLModule,
     HttpClientModule,
-    // BuchungenModule,
-    // SaldoModule,
-    // CombinedModule
+    RefreshModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
