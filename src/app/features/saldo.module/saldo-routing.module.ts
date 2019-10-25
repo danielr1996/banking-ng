@@ -6,24 +6,17 @@ import {ChartistModule} from 'ng-chartist';
 import {SaldiChartComponent} from './components/saldi-chart/saldi-chart.component';
 import {SaldiTableComponent} from './components/saldi-table/saldi-table.component';
 import {SaldiComponent} from './components/saldi/saldi.component';
-import {SaldoRoutingModule} from './saldo-routing.module';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
-  declarations: [
-    SaldoComponent,
-    SaldiSmartComponent,
-    SaldiChartComponent,
-    SaldiTableComponent,
-    SaldiComponent],
   imports: [
-    CommonModule,
-    ChartistModule,
-    SaldoRoutingModule
+    RouterModule.forChild([{
+      path: '', component: SaldiComponent
+    }])
   ],
   exports: [
-    SaldoComponent,
+    RouterModule
   ],
-
 })
-export class SaldoModule {
+export class SaldoRoutingModule {
 }

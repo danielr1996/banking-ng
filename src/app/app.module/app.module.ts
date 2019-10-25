@@ -1,24 +1,25 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {AppComponent} from './app.component';
+import {AppComponent} from './app/app.component';
 import {GraphQLModule} from '../graphql.module/graphql.module';
 import {HttpClientModule} from '@angular/common/http';
-import {BuchungenModule} from '../features/buchungen.module/buchungen.module';
-import {SaldoModule} from '../features/saldo.module/saldo.module';
-import {CombinedModule} from "../features/combined.module/combined.module";
+import {AppRoutingModule} from './app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     GraphQLModule,
     HttpClientModule,
-    BuchungenModule,
-    SaldoModule,
-    CombinedModule
+    // BuchungenModule,
+    // SaldoModule,
+    // CombinedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

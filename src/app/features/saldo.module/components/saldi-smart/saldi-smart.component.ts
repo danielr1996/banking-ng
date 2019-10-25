@@ -3,8 +3,7 @@ import {SaldoService} from '../../saldo.service';
 import {Saldo} from '../../saldo';
 import {merge, Observable, of, Subject} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
-import {BuchungContainer} from '../../../buchungen.module/buchung-container';
-import {SaldiContainer} from "../../saldi-container";
+import {SaldiContainer} from '../../saldi-container';
 
 @Component({
   selector: 'app-saldi-smart',

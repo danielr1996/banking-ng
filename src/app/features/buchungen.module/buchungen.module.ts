@@ -3,16 +3,18 @@ import {BuchungenTableComponent} from './components/buchungen-table/buchungen-ta
 import {CommonsModule} from '../../commons.module/commons.module';
 import {BuchungenSmartComponent} from './components/buchungen-smart/buchungen-smart.component';
 import {BuchungenChartComponent} from './components/buchungen-chart/buchungen-chart.component';
-import {ChartistModule} from "ng-chartist";
+import {ChartistModule} from 'ng-chartist';
+import { BuchungenComponent } from './components/buchungen/buchungen.component';
+import {BuchungenRoutingModule} from './buchungen-routing.module';
 
 @NgModule({
   imports: [
-    CommonsModule, ChartistModule
+    CommonsModule, ChartistModule, BuchungenRoutingModule
   ],
   exports: [
-    BuchungenSmartComponent
+    // BuchungenComponent
   ],
-  declarations: [BuchungenTableComponent, BuchungenSmartComponent, BuchungenChartComponent]
+  declarations: [BuchungenTableComponent, BuchungenSmartComponent, BuchungenChartComponent, BuchungenComponent]
 })
 export class BuchungenModule {
 }

@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import * as Chartist from 'chartist';
 import 'chartist-plugin-tooltip';
 import 'chartist-plugin-pointlabels';
 import {Observable, zip} from 'rxjs';
