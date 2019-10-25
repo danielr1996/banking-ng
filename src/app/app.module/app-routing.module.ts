@@ -18,7 +18,10 @@ import {DashboardComponent} from './dashboard/dashboard.component';
         loadChildren: () => import('../features/combined.module/combined.module').then(m => m.CombinedModule)
       },
       {
-        path: '', component: DashboardComponent
+        path: '', component: DashboardComponent,
+      },
+      {
+        path: '**', component: DashboardComponent,
       },
     ])
   ],
