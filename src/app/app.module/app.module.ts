@@ -7,6 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {RefreshModule} from '../features/refresh/refresh.module';
+import {SaldoModule} from '../features/saldo.module/saldo.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {RefreshModule} from '../features/refresh/refresh.module';
     GraphQLModule,
     HttpClientModule,
     RefreshModule,
+    SaldoModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
