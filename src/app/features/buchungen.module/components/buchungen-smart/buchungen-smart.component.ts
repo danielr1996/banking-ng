@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {merge, Observable, of, Subject} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
-import {Buchung} from '../../buchung';
+import {Buchung} from '../../model/buchung';
 import {BuchungContainer} from '../../buchung-container';
 import {BuchungenService} from '../../services/buchungen.service';
 

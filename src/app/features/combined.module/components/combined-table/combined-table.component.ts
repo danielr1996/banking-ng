@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Buchung} from 'src/app/features/buchungen.module/buchung';
+import {Buchung} from 'src/app/features/buchungen.module/model/buchung';
 
 @Component({
   selector: 'app-buchungen-table',

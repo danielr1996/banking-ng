@@ -1,4 +1,4 @@
-import {Buchung} from './buchung';
+import {Buchung} from './model/buchung';
 
 export class BuchungContainer {
   constructor(

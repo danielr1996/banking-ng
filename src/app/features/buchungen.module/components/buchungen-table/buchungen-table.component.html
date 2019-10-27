@@ -4,13 +4,17 @@
     <th>Betrag</th>
     <th>Verwendungszweck</th>
     <th>Buchungstag</th>
+    <th>IBAN</th>
+    <th>NAME</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let buchung of buchungen">
-    <td>{{buchung.betrag | currency:buchung.waehrung}}</td>
-    <td>{{buchung.verwendungszweck}}</td>
-    <td>{{buchung.buchungstag | date:'dd.MM.yyyy'}}</td>
+    <td>{{buchung?.betrag | currency:buchung.waehrung}}</td>
+    <td>{{buchung?.verwendungszweck}}</td>
+    <td>{{buchung?.buchungstag | date:'dd.MM.yyyy'}}</td>
+    <td>{{buchung?.otherPartner?.iban}}</td>
+    <td>{{buchung?.otherPartner?.name}}</td>
   </tr>
   </tbody>
 </table>

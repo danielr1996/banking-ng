@@ -3,7 +3,7 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {catchError, pluck, tap} from 'rxjs/operators';
 import {Observable, of, throwError} from 'rxjs';
-import {Buchung} from '../buchung';
+import {Buchung} from '../model/buchung';
 import {BuchungContainer} from '../buchung-container';
 
 @Injectable({
@@ -35,7 +35,11 @@ export class BuchungenService {
               verwendungszweck
               betrag
               waehrung
-              buchungstag
+              buchungstag,
+              otherPartner{
+                iban
+                name
+              }
              }
             }
           }

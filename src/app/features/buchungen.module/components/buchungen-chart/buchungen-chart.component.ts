@@ -6,7 +6,7 @@ import {format} from "date-fns";
 import * as Chartist from 'chartist';
 import 'chartist-plugin-tooltip';
 import 'chartist-plugin-pointlabels';
-import {Buchung} from "../../buchung";
+import {Buchung} from "../../model/buchung";
 
 @Component({
   selector: 'app-buchungen-chart',

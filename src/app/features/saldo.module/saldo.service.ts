@@ -3,7 +3,7 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {map, pluck, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {Buchung} from '../buchungen.module/buchung';
+import {Buchung} from '../buchungen.module/model/buchung';
 import {Saldo} from './saldo';
 import {SaldiContainer} from './saldi-container';
 

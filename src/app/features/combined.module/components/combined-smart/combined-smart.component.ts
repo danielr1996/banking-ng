@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {merge, Observable, of, Subject} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
-import {Buchung} from "../../../buchungen.module/buchung";
+import {Buchung} from "../../../buchungen.module/model/buchung";
 import {BuchungContainer} from "../../../buchungen.module/buchung-container";
 import {Saldo} from "../../../saldo.module/saldo";
 import {BuchungenService} from "../../../buchungen.module/services/buchungen.service";

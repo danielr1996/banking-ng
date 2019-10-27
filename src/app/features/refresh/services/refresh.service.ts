@@ -3,7 +3,7 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {catchError, pluck, tap} from 'rxjs/operators';
 import {Observable, of, throwError} from 'rxjs';
-import {Buchung} from '../../buchungen.module/buchung';
+import {Buchung} from '../../buchungen.module/model/buchung';
 import {BuchungContainer} from '../../buchungen.module/buchung-container';
 
 @Injectable({
