@@ -8,6 +8,7 @@ import {AppRoutingModule} from './app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {RefreshModule} from '../features/refresh/refresh.module';
 import {SaldoModule} from '../features/saldo.module/saldo.module';
+import {KontoModule} from '../features/konto.module/konto.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {SaldoModule} from '../features/saldo.module/saldo.module';
     HttpClientModule,
     RefreshModule,
     SaldoModule,
+    KontoModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

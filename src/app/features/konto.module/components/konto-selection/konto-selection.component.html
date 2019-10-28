@@ -1,0 +1,8 @@
+<!--
+<ul>
+  <li *ngFor="let konto of konten$|async">{{konto?.kontonummer}}</li>
+</ul>
+-->
+<select [formControl]="form" class="custom-select">
+  <option *ngFor="let konto of konten$|async" [value]="konto.id">{{konto?.kontonummer}}</option>
+</select>

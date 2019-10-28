@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import gql from 'graphql-tag';
 import {catchError, pluck, tap} from 'rxjs/operators';
 
@@ -8,6 +8,7 @@ import {catchError, pluck, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AccountService {
+  public currentUser$: BehaviorSubject<string> = new BehaviorSubject(this.loggedInUser);
   constructor(private apollo: Apollo) {
 
   }
@@ -50,13 +51,20 @@ export class AccountService {
       })
       .pipe(
         pluck('data', 'signIn'),
-        tap((token: any) => {
-          localStorage.setItem('currentUser', token);
-        }),
+        tap((token: any) => this.loggedInUser = token),
         catchError((err: Error) => {
           console.error('Error executing query', err);
           return of(err);
         })
       );
+  }
+
+  set loggedInUser(token: string) {
+    localStorage.setItem('currentUser', token);
+    this.currentUser$.next(token);
+  }
+
+  get loggedInUser(): string {
+    return localStorage.getItem('currentUser');
   }
 }

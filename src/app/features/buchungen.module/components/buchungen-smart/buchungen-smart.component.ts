@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {merge, Observable, of, Subject} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {combineLatest, merge, Observable, of, Subject, zip} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
 import {Buchung} from '../../model/buchung';
 import {BuchungContainer} from '../../buchung-container';
 import {BuchungenService} from '../../services/buchungen.service';
+import {KontoService} from '../../../konto.module/components/konto.service';
 
 @Component({
   selector: 'app-buchungen-smart',
@@ -14,6 +15,7 @@ export class BuchungenSmartComponent implements OnInit {
   readonly ITEMS_PER_PAGE: number = 10;
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
+  readonly konto$: Observable<string> = this.kontoService.currentKonto$;
   private totalPages: number;
   private totalElements: number;
   private style: 'table' | 'chart' = 'table';
@@ -41,20 +43,21 @@ export class BuchungenSmartComponent implements OnInit {
         next = acc;
       }
       return next;
-    })
+    }),
   );
 
 
-  readonly buchungen$: Observable<Buchung[]> = this.page$.pipe(
-    flatMap((page: number) => this.buchungenService.getBuchungen(page, this.ITEMS_PER_PAGE)),
+  readonly buchungen$: Observable<Buchung[]> = combineLatest(this.page$, this.konto$).pipe(
+    tap(([page, konto]) => console.log(page, konto)),
+    flatMap(([page, konto]) => this.buchungenService.getBuchungen(konto, page, this.ITEMS_PER_PAGE)),
     tap((container: BuchungContainer) => {
       this.totalPages = container.totalPages;
       this.totalElements = container.totalElements;
     }),
-    pluck('buchungen')
+    pluck('buchungen'),
   );
 
-  constructor(private buchungenService: BuchungenService) {
+  constructor(private buchungenService: BuchungenService, private kontoService: KontoService) {
   }
 
   ngOnInit(): void {

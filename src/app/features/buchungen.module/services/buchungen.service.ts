@@ -15,12 +15,12 @@ export class BuchungenService {
 
   }
 
-  public getBuchungen(page?: number, size?: number): Observable<BuchungContainer> {
+  public getBuchungen(kontoId: string, page?: number, size?: number): Observable<BuchungContainer> {
     let paramQuery: string = '';
 
     const pageQuery: string = `page: ${page},`;
     const sizeQuery: string = `size: ${size},`;
-    const kontoQuery: string = `kontoId: "42601f3b-6e91-4c80-bb11-c5a21d98fc57"`;
+    const kontoQuery: string = `kontoId: "${kontoId}"`;
 
     if (page !== undefined && size !== undefined) {
       paramQuery = `(${kontoQuery},${pageQuery}${sizeQuery})`;

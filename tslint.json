@@ -8,7 +8,6 @@
       "call-signature",
       "arrow-call-signature",
       "parameter",
-      "arrow-parameter",
       "property-declaration",
       "variable-declaration",
       "object-destructuring",
