@@ -18,6 +18,10 @@ import {DashboardComponent} from './dashboard/dashboard.component';
         loadChildren: () => import('../features/combined.module/combined.module').then(m => m.CombinedModule)
       },
       {
+        path: 'account',
+        loadChildren: () => import('../features/account.module/account.module').then(m => m.AccountModule)
+      },
+      {
         path: '', component: DashboardComponent,
       },
       {

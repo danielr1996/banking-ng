@@ -17,6 +17,12 @@
         <li class="nav-item" [routerLinkActive]="'active'">
           <a class="nav-link" [routerLink]="'combined'" routerLinkActive #rla="routerLinkActive">Kombiniert</a>
         </li>
+        <li class="nav-item" [routerLinkActive]="'active'">
+          <a class="nav-link" [routerLink]="['account','login']" routerLinkActive #rla="routerLinkActive">Anmelden</a>
+        </li>
+        <li class="nav-item" [routerLinkActive]="'active'">
+          <a class="nav-link" [routerLink]="['account','register']" routerLinkActive #rla="routerLinkActive">Registrieren</a>
+        </li>
         <!--
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"

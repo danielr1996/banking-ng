@@ -21,7 +21,7 @@ export class SaldoService {
       .watchQuery({
         query: gql`
           {
-            saldo{
+            saldo(kontoId: "42601f3b-6e91-4c80-bb11-c5a21d98fc57"){
               betrag
               datum
             }
@@ -37,10 +37,13 @@ export class SaldoService {
   public getSaldi(page?: number, size?: number): Observable<SaldiContainer> {
     let paramQuery: string = '';
 
+    const kontoQuery: string = `kontoId: "42601f3b-6e91-4c80-bb11-c5a21d98fc57"`;
     const pageQuery: string = `page: ${page},`;
     const sizeQuery: string = `size: ${size},`;
     if (page !== undefined && size !== undefined) {
-      paramQuery = `(${pageQuery}${sizeQuery})`;
+      paramQuery = `(${kontoQuery},${pageQuery}${sizeQuery})`;
+    } else {
+      paramQuery = `${kontoQuery}`;
     }
     return this.apollo
       .watchQuery({
