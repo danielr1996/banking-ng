@@ -15,7 +15,7 @@ export class BuchungenSmartComponent implements OnInit {
   readonly ITEMS_PER_PAGE: number = 10;
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
-  readonly konto$: Observable<string> = this.kontoService.currentKonto$;
+  readonly konto$: Observable<string[]> = this.kontoService.selectedKontos$;
   private totalPages: number;
   private totalElements: number;
   private style: 'table' | 'chart' = 'table';
@@ -48,7 +48,7 @@ export class BuchungenSmartComponent implements OnInit {
 
 
   readonly buchungen$: Observable<Buchung[]> = combineLatest(this.page$, this.konto$).pipe(
-    tap(([page, konto]) => console.log(page, konto)),
+    // tap(([page, konto]) => console.log(page, konto)),
     flatMap(([page, konto]) => this.buchungenService.getBuchungen(konto, page, this.ITEMS_PER_PAGE)),
     tap((container: BuchungContainer) => {
       this.totalPages = container.totalPages;

@@ -11,9 +11,9 @@ import {AccountService} from '../../account.module/account.service';
   providedIn: 'root'
 })
 export class KontoService {
-  public currentKonto$: BehaviorSubject<string> = new BehaviorSubject(this.currentKonto);
+  public selectedKontos$: BehaviorSubject<string[]> = new BehaviorSubject(this.selectedKontos);
 
-  constructor(private apollo: Apollo, private accountService: AccountService) {
+  constructor(private apollo: Apollo) {
 
   }
 
@@ -40,12 +40,12 @@ export class KontoService {
       );
   }
 
-  public get currentKonto(): string {
-    return localStorage.getItem('currentKonto');
+  public get selectedKontos(): string[] {
+    return JSON.parse(localStorage.getItem('selectedKontos'));
   }
 
-  public set currentKonto(konto: string) {
-    localStorage.setItem('currentKonto', konto);
-    this.currentKonto$.next(konto);
+  public set selectedKontos(kontos: string[]) {
+    localStorage.setItem('selectedKontos', JSON.stringify(kontos));
+    this.selectedKontos$.next(kontos);
   }
 }

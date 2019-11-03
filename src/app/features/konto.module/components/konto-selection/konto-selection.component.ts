@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {KontoService} from '../konto.service';
-import {Observable, pipe} from 'rxjs';
+import {iif, Observable, of, pipe} from 'rxjs';
 import {Konto} from '../konto';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {flatMap, tap} from 'rxjs/operators';
+import {flatMap, map, tap} from 'rxjs/operators';
 import {AccountService} from '../../../account.module/account.service';
 
 @Component({
@@ -12,15 +12,25 @@ import {AccountService} from '../../../account.module/account.service';
   styleUrls: ['./konto-selection.component.scss']
 })
 export class KontoSelectionComponent implements OnInit {
-  form: FormControl = this.fb.control(this.kontoService.currentKonto);
-  readonly konten$: Observable<Konto[]> = this.accountService.currentUser$.pipe(flatMap(currentUser => this.kontoService.getKonten(currentUser)));
+  form: FormControl = this.fb.control(this.kontoService.selectedKontos);
+  readonly konten$: Observable<Konto[]> = this.accountService.currentUser$.pipe(
+    flatMap(currentUser => this.kontoService.getKonten(currentUser)),
+  );
 
   constructor(private kontoService: KontoService, private fb: FormBuilder, private accountService: AccountService) {
   }
 
   ngOnInit(): void {
     this.form.valueChanges.pipe(
-      tap((kontoId: string) => this.kontoService.currentKonto = kontoId),
+      flatMap(kontoId => {
+        if (kontoId === 'all') {
+          return this.konten$.pipe(map(konten => konten.map(konto => konto.id)));
+        } else {
+          return of([kontoId]);
+        }
+      }),
+      tap(console.log),
+      tap((kontoId: string[]) => this.kontoService.selectedKontos = kontoId),
     ).subscribe();
   }
 }

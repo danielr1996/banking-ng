@@ -17,7 +17,7 @@ export class CombinedSmartComponent implements OnInit {
   readonly ITEMS_PER_PAGE: number = 10;
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
-  readonly konto$: Observable<string> = this.kontoService.currentKonto$;
+  readonly konto$: Observable<string[]> = this.kontoService.selectedKontos$;
   private totalPages: number;
   private totalElements: number;
   private style: 'table' | 'chart' = 'table';
