@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from 'src/app/features/account.module/account.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,9 @@ export class LoginComponent implements OnInit {
     username: [null, Validators.required],
     password: [null, Validators.required],
   });
-  constructor(private fb: FormBuilder, private accountService: AccountService) { }
+
+  constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
@@ -21,7 +24,7 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       const username: string = this.form.get(['username']).value;
       const password: string = this.form.get(['password']).value;
-      this.accountService.signin(username, password).subscribe(console.log);
+      this.accountService.signin(username, password).subscribe(() => this.router.navigate(['/']));
     }
   }
 }

@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {IsLoggedInGuard} from '../authorization/is-logged-in-guard.service';
 
 @NgModule({
   imports: [
@@ -22,10 +23,14 @@ import {DashboardComponent} from './dashboard/dashboard.component';
         loadChildren: () => import('../features/account.module/account.module').then(m => m.AccountModule)
       },
       {
-        path: '', component: DashboardComponent,
-      },
-      {
-        path: '**', component: DashboardComponent,
+        path: '', children: [
+          {
+            path: '', component: DashboardComponent,
+          },
+          {
+            path: '**', component: DashboardComponent,
+          },
+        ], canActivate: [IsLoggedInGuard]
       },
     ])
   ],

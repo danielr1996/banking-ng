@@ -8,7 +8,7 @@ import {RouterModule} from '@angular/router';
   imports: [RouterModule.forChild([
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: '', redirectTo: 'login'},
+    {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: '**', redirectTo: 'login'},
   ])],
   exports: [RouterModule]

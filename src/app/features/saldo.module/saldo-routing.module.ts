@@ -7,11 +7,15 @@ import {SaldiChartComponent} from './components/saldi-chart/saldi-chart.componen
 import {SaldiTableComponent} from './components/saldi-table/saldi-table.component';
 import {SaldiComponent} from './components/saldi/saldi.component';
 import {RouterModule} from '@angular/router';
+import {IsLoggedInGuard} from '../../authorization/is-logged-in-guard.service';
 
 @NgModule({
   imports: [
     RouterModule.forChild([{
-      path: '', component: SaldiComponent
+      path: '', children: [
+        {path: '', component: SaldiComponent}
+      ],
+      canActivate: [IsLoggedInGuard]
     }])
   ],
   exports: [

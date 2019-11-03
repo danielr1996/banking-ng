@@ -8,7 +8,8 @@ import {catchError, pluck, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AccountService {
-  public currentUser$: BehaviorSubject<string> = new BehaviorSubject(this.loggedInUser);
+  public currentUserJwt$: BehaviorSubject<string> = new BehaviorSubject(this.currentUserJwt);
+
   constructor(private apollo: Apollo) {
 
   }
@@ -51,7 +52,7 @@ export class AccountService {
       })
       .pipe(
         pluck('data', 'signIn'),
-        tap((token: any) => this.loggedInUser = token),
+        tap((token: any) => this.currentUserJwt = token),
         catchError((err: Error) => {
           console.error('Error executing query', err);
           return of(err);
@@ -59,12 +60,28 @@ export class AccountService {
       );
   }
 
-  set loggedInUser(token: string) {
-    localStorage.setItem('currentUser', token);
-    this.currentUser$.next(token);
+  public signout(): void {
+    localStorage.removeItem('currentUser');
   }
 
-  get loggedInUser(): string {
-    return localStorage.getItem('currentUser');
+  set currentUserJwt(token: string) {
+    localStorage.setItem('currentUserJwt', token);
+    this.currentUserJwt$.next(token);
+  }
+
+  get currentUserJwt(): string {
+    return localStorage.getItem('currentUserJwt');
+  }
+
+  get currentUser(): string {
+    return this.parseJwt(this.currentUserJwt).sub;
+  }
+
+  private parseJwt(token: string): {sub: string} {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+      return null;
+    }
   }
 }

@@ -5,10 +5,11 @@ import {AppComponent} from './app/app.component';
 import {GraphQLModule} from '../graphql.module/graphql.module';
 import {HttpClientModule} from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 import {RefreshModule} from '../features/refresh/refresh.module';
 import {SaldoModule} from '../features/saldo.module/saldo.module';
 import {KontoModule} from '../features/konto.module/konto.module';
+import {AccountModule} from '../features/account.module/account.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {KontoModule} from '../features/konto.module/konto.module';
     RefreshModule,
     SaldoModule,
     KontoModule,
+    AccountModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

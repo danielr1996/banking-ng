@@ -13,7 +13,7 @@ import {AccountService} from '../../../account.module/account.service';
 })
 export class KontoSelectionComponent implements OnInit {
   form: FormControl = this.fb.control(this.kontoService.selectedKontos);
-  readonly konten$: Observable<Konto[]> = this.accountService.currentUser$.pipe(
+  readonly konten$: Observable<Konto[]> = of(this.accountService.currentUser).pipe(
     flatMap(currentUser => this.kontoService.getKonten(currentUser)),
   );
 
