@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {KontoService} from '../konto.service';
-import {iif, Observable, of, pipe} from 'rxjs';
+import {combineLatest, iif, Observable, of, pipe} from 'rxjs';
 import {Konto} from '../konto';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {flatMap, map, tap} from 'rxjs/operators';
-import {AccountService} from '../../../account.module/account.service';
+import {distinctUntilChanged, flatMap, map, tap} from 'rxjs/operators';
+import {AccountService} from '../../../account.module/services/account.service';
+import {UserQuery, UserStore} from '../../../account.module/store/user.store';
+import {KontoQuery, KontoStore} from '../../store/konto.store';
+import {_} from 'underscore';
 
 @Component({
   selector: 'app-konto-selection',
@@ -12,25 +15,39 @@ import {AccountService} from '../../../account.module/account.service';
   styleUrls: ['./konto-selection.component.scss']
 })
 export class KontoSelectionComponent implements OnInit {
-  form: FormControl = this.fb.control(this.kontoService.selectedKontos);
-  readonly konten$: Observable<Konto[]> = of(this.accountService.currentUser).pipe(
+  form: FormControl = this.fb.control([null]);
+  readonly konten$: Observable<Konto[]> = this.userQuery.userId$.pipe(
     flatMap(currentUser => this.kontoService.getKonten(currentUser)),
   );
 
-  constructor(private kontoService: KontoService, private fb: FormBuilder, private accountService: AccountService) {
+  constructor(
+    private kontoService: KontoService,
+    private fb: FormBuilder,
+    private accountService: AccountService,
+    private userQuery: UserQuery,
+    private kontoStore: KontoStore,
+    private kontoQuery: KontoQuery) {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.pipe(
-      flatMap(kontoId => {
-        if (kontoId === 'all') {
-          return this.konten$.pipe(map(konten => konten.map(konto => konto.id)));
+    combineLatest(this.kontoQuery.kontos$, this.konten$).pipe(
+      distinctUntilChanged(),
+      tap(([selectedKontos, availableKontos]) => {
+        console.log();
+        let newSelection: string[];
+        if (_.intersection(selectedKontos, availableKontos.map(konto => konto.id)).length === 0) {
+          newSelection = availableKontos.map(konto => konto.id);
         } else {
-          return of([kontoId]);
+          newSelection = selectedKontos;
         }
+        this.form.setValue(JSON.stringify(newSelection));
       }),
-      tap(console.log),
-      tap((kontoId: string[]) => this.kontoService.selectedKontos = kontoId),
+    ).subscribe();
+
+    this.form.valueChanges.pipe(
+      distinctUntilChanged(),
+      map(kontoId => JSON.parse(kontoId)),
+      tap((kontos: string[]) => this.kontoStore.update(state => ({kontos}))),
     ).subscribe();
   }
 }

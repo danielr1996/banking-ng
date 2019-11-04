@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ChartEvent, ChartType} from 'ng-chartist';
-import {Saldo} from '../../saldo';
+import {Saldo} from '../../model/saldo';
 import {format} from 'date-fns';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';

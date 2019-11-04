@@ -10,6 +10,8 @@ import {RefreshModule} from '../features/refresh/refresh.module';
 import {SaldoModule} from '../features/saldo.module/saldo.module';
 import {KontoModule} from '../features/konto.module/konto.module';
 import {AccountModule} from '../features/account.module/account.module';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import {environment} from '../../environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import {AccountModule} from '../features/account.module/account.module';
     SaldoModule,
     KontoModule,
     AccountModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

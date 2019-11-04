@@ -4,7 +4,7 @@ import 'chartist-plugin-pointlabels';
 import {Observable, zip} from 'rxjs';
 import {ChartEvent, ChartType} from 'ng-chartist';
 import {Buchung} from 'src/app/features/buchungen.module/model/buchung';
-import {Saldo} from 'src/app/features/saldo.module/saldo';
+import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 import {map} from 'rxjs/operators';
 import {format} from 'date-fns';
 

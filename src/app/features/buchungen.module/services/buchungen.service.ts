@@ -21,7 +21,6 @@ export class BuchungenService {
     const pageQuery: string = `page: ${page},`;
     const sizeQuery: string = `size: ${size},`;
     const kontoQuery: string = `kontoIds: [${kontoIds.map(k => '"' + k + '"').join(',')}]`;
-    console.log(kontoQuery);
 
     if (page !== undefined && size !== undefined) {
       paramQuery = `(${kontoQuery},${pageQuery}${sizeQuery})`;

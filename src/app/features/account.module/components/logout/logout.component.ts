@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AccountService} from "../../account.service";
+import {AccountService} from "../../services/account.service";
 import {Router} from "@angular/router";
+import {UserQuery, UserStore} from '../../store/user.store';
 
 @Component({
   selector: 'app-logout',
@@ -9,11 +10,11 @@ import {Router} from "@angular/router";
 })
 export class LogoutComponent {
 
-  constructor(private accountService: AccountService, private router: Router) {
+  constructor(private userStore: UserStore, private userQuery: UserQuery, private router: Router) {
   }
 
-  public signout() {
-    this.accountService.signout();
+  public signout(): void {
+    this.userStore.update(state => ({token: null}));
     this.router.navigate(['/', 'account', 'login']);
   }
 }

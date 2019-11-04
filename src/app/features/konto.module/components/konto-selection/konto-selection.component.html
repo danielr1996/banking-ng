@@ -4,6 +4,6 @@
 </ul>
 -->
 <select [formControl]="form" class="custom-select">
-  <option *ngFor="let konto of konten$|async" [value]="konto.id">{{konto?.kontonummer}}</option>
-  <option [value]="'all'">Alle Konten</option>
+  <option [value]="this.konten$ | async | selection">Alle Konten</option>
+  <option *ngFor="let konto of konten$|async" [value]="konto.id | selection">{{konto?.kontonummer}}</option>
 </select>

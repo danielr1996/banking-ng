@@ -1,6 +1,6 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
-import { IsLoggedInGuard } from './is-logged-in-guard.service';
+import { IsLoggedInGuard } from './is-logged-in.guard';
 
 describe('AuthorizationGuard', () => {
   beforeEach(() => {

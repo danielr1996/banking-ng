@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {combineLatest, merge, Observable, of, Subject} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
-import {Buchung} from "../../../buchungen.module/model/buchung";
-import {BuchungContainer} from "../../../buchungen.module/buchung-container";
-import {Saldo} from "../../../saldo.module/saldo";
-import {BuchungenService} from "../../../buchungen.module/services/buchungen.service";
-import {SaldoService} from "../../../saldo.module/saldo.service";
-import {KontoService} from '../../../konto.module/components/konto.service';
+import {Buchung} from '../../../buchungen.module/model/buchung';
+import {BuchungContainer} from '../../../buchungen.module/buchung-container';
+import {Saldo} from '../../../saldo.module/model/saldo';
+import {BuchungenService} from '../../../buchungen.module/services/buchungen.service';
+import {SaldoService} from '../../../saldo.module/services/saldo.service';
+import {KontoQuery} from '../../../konto.module/store/konto.store';
 
 @Component({
   selector: 'app-combined-smart',
@@ -17,7 +17,7 @@ export class CombinedSmartComponent implements OnInit {
   readonly ITEMS_PER_PAGE: number = 10;
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
-  readonly konto$: Observable<string[]> = this.kontoService.selectedKontos$;
+  readonly konto$: Observable<string[]> = this.kontoQuery.kontos$;
   private totalPages: number;
   private totalElements: number;
   private style: 'table' | 'chart' = 'table';
@@ -63,7 +63,7 @@ export class CombinedSmartComponent implements OnInit {
     pluck('saldi')
   )
 
-  constructor(private buchungenService: BuchungenService, private saldoService: SaldoService, private kontoService: KontoService) {
+  constructor(private buchungenService: BuchungenService, private saldoService: SaldoService, private kontoQuery: KontoQuery) {
   }
 
   ngOnInit(): void {

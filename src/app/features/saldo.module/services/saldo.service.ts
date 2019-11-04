@@ -3,9 +3,9 @@ import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {map, pluck, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {Buchung} from '../buchungen.module/model/buchung';
-import {Saldo} from './saldo';
-import {SaldiContainer} from './saldi-container';
+import {Buchung} from '../../buchungen.module/model/buchung';
+import {Saldo} from '../model/saldo';
+import {SaldiContainer} from '../model/saldi-container';
 
 @Injectable({
   providedIn: 'root'

@@ -3,19 +3,19 @@ import {Apollo} from 'apollo-angular';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import gql from 'graphql-tag';
 import {catchError, pluck, tap} from 'rxjs/operators';
+import {UserStore} from '../store/user.store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  public currentUserJwt$: BehaviorSubject<string> = new BehaviorSubject(this.currentUserJwt);
+  // public currentUserJwt$: BehaviorSubject<string> = new BehaviorSubject(this.currentUserJwt);
 
-  constructor(private apollo: Apollo) {
+  constructor(private apollo: Apollo, private userStore: UserStore) {
 
   }
 
   public register(username: string, password: string): Observable<{ id: string, name: string }> {
-    console.log(username, password);
     return this.apollo
       .mutate({
         mutation: gql`
@@ -52,36 +52,11 @@ export class AccountService {
       })
       .pipe(
         pluck('data', 'signIn'),
-        tap((token: any) => this.currentUserJwt = token),
+        tap((token: any) => this.userStore.update(state => ({token}))),
         catchError((err: Error) => {
           console.error('Error executing query', err);
           return of(err);
         })
       );
-  }
-
-  public signout(): void {
-    localStorage.removeItem('currentUser');
-  }
-
-  set currentUserJwt(token: string) {
-    localStorage.setItem('currentUserJwt', token);
-    this.currentUserJwt$.next(token);
-  }
-
-  get currentUserJwt(): string {
-    return localStorage.getItem('currentUserJwt');
-  }
-
-  get currentUser(): string {
-    return this.parseJwt(this.currentUserJwt).sub;
-  }
-
-  private parseJwt(token: string): {sub: string} {
-    try {
-      return JSON.parse(atob(token.split('.')[1]));
-    } catch (e) {
-      return null;
-    }
   }
 }

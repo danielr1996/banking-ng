@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {SaldoService} from '../../saldo.service';
-import {Saldo} from '../../saldo';
+import {SaldoService} from '../../services/saldo.service';
+import {Saldo} from '../../model/saldo';
 
 @Component({
   selector: 'app-saldo',

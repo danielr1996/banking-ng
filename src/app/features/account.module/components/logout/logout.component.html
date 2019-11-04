@@ -1,1 +1,4 @@
-<button (click)="signout()" type="button" class="btn btn-outline-secondary">Ausloggen</button>
+<ng-container *ngIf="userQuery.isLoggedIn$ |async">
+  <button (click)="signout()" type="button" class="btn btn-outline-secondary">Ausloggen</button>
+</ng-container>
+
