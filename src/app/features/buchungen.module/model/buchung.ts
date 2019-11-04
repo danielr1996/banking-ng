@@ -1,4 +1,5 @@
 import {Transaktionspartner} from './transaktionspartner';
+import {Konto} from 'src/app/features/konto.module/components/konto';
 
 export class Buchung {
   constructor(
@@ -7,6 +8,7 @@ export class Buchung {
     public verwendungszweck: string,
     public waehrung: string,
     public buchungstag: Date,
+    public konto: Konto,
     public selfPartner: Transaktionspartner,
     public otherPartner: Transaktionspartner,
   ) {

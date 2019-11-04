@@ -5,7 +5,8 @@
     <th>Verwendungszweck</th>
     <th>Buchungstag</th>
     <th>IBAN</th>
-    <th>NAME</th>
+    <th>Name</th>
+    <th>Konto</th>
   </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
     <td>{{buchung?.buchungstag | date:'dd.MM.yyyy'}}</td>
     <td>{{buchung?.otherPartner?.iban}}</td>
     <td>{{buchung?.otherPartner?.name}}</td>
+    <td>{{buchung?.konto?.kontonummer}}</td>
   </tr>
   </tbody>
 </table>

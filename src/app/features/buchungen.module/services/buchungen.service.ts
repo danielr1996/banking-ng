@@ -39,7 +39,10 @@ export class BuchungenService {
               verwendungszweck
               betrag
               waehrung
-              buchungstag,
+              buchungstag
+              konto{
+                kontonummer
+              }
               otherPartner{
                 iban
                 name
