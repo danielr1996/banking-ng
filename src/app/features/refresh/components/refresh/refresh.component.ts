@@ -2,6 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {RefreshService} from '../../services/refresh.service';
 import * as uuid from 'uuid';
 
+// FIXME
+(window as any).global = window;
+(window as any).process = window;
+(window as any).Buffer = window;
+(window as any).process.browser = true;
+(window as any).process.version = '';
+(window as any).process.versions = {node: false};
+
 @Component({
   selector: 'app-refresh',
   templateUrl: './refresh.component.html',
@@ -36,9 +44,6 @@ export class RefreshComponent implements OnInit {
       const NEED_PT_TAN: string = `de.danielr1996.NEED_PT_TAN.${this.rpcId}`;
       const NEED_PT_TANMEDIA: string = `de.danielr1996.NEED_PT_TANMEDIA.${this.rpcId}`;
       const NEED_PT_SECMECH: string = `de.danielr1996.NEED_PT_SECMECH.${this.rpcId}`;
-      console.log(NEED_PT_TANMEDIA)
-      console.log(NEED_PT_SECMECH)
-      console.log(NEED_PT_TAN)
       session.register(NEED_PT_TAN, getTan);
       session.register(NEED_PT_TANMEDIA, getTanMedia);
       session.register(NEED_PT_SECMECH, getTanMech);
@@ -48,5 +53,6 @@ export class RefreshComponent implements OnInit {
 
   refresh(): void {
     this.refreshService.refresh(this.rpcId).subscribe();
+    // TODO: Reload Data
   }
 }

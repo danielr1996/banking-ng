@@ -16,7 +16,7 @@ export class SaldiSmartComponent implements OnInit {
   readonly next$: Subject<number> = new Subject();
   private totalPages: number;
   private totalElements: number;
-  private style: 'table' | 'chart' = 'table';
+  public style: 'table' | 'chart' = 'table';
 
   readonly page$: Observable<number> = merge(
     of(0).pipe(
