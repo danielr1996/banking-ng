@@ -20,7 +20,7 @@ export class RefreshService {
       .mutate({
         mutation: gql`
             mutation{
-              refresh(dummy: "asd")
+              refresh(username: "user1")
             }
         `,
       })

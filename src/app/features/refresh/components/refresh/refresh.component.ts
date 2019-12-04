@@ -22,6 +22,6 @@ export class RefreshComponent implements OnInit {
   }
 
   refresh(): void {
-    // this.refreshService.refresh().subscribe();
+    this.refreshService.refresh().subscribe();
   }
 }
