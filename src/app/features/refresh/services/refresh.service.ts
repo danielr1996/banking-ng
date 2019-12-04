@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {catchError, pluck, tap} from 'rxjs/operators';
-import {Observable, of, throwError} from 'rxjs';
-import {Buchung} from '../../buchungen.module/model/buchung';
-import {BuchungContainer} from '../../buchungen.module/buchung-container';
+import {catchError} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +13,12 @@ export class RefreshService {
 
   }
 
-  public refresh(): Observable<void> {
+  public refresh(rpcId: string): Observable<void> {
     return this.apollo
       .mutate({
         mutation: gql`
             mutation{
-              refresh(dummy: "asd")
+              refresh(username: "user1", rpcId: "${rpcId}")
             }
         `,
       })

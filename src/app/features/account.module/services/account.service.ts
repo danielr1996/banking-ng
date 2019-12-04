@@ -35,7 +35,7 @@ export class AccountService {
           console.error('Error executing query', err);
           return of(err);
         })
-      );
+      ) as Observable<{ id: string, name: string }>;
   }
 
   public signin(name: string, password: string): Observable<string> {

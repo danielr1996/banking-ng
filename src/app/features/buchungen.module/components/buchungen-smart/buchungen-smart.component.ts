@@ -19,7 +19,7 @@ export class BuchungenSmartComponent implements OnInit {
   readonly konto$: Observable<string[]> = this.kontoQuery.kontos$;
   private totalPages: number;
   private totalElements: number;
-  private style: 'table' | 'chart' = 'table';
+  public style: 'table' | 'chart' = 'table';
 
   readonly page$: Observable<number> = merge(
     of(0).pipe(
