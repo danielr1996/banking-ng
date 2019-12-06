@@ -34,6 +34,7 @@ export class UserStore extends Store<UserState> {
 export class UserQuery extends Query<UserState> {
   isLoggedIn$: Observable<boolean> = this.select(state => !!state.token);
   userId$: Observable<string> = this.select(({token}) => this.parseJwt(token).sub);
+  token$: Observable<string> = this.select(({token}) => token);
 
   constructor(protected store: UserStore) {
     super(store);

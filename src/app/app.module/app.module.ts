@@ -12,11 +12,13 @@ import {KontoModule} from '../features/konto.module/konto.module';
 import {AccountModule} from '../features/account.module/account.module';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import {environment} from '../../environments/environment';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    ErrorComponent
   ],
   imports: [
     AppRoutingModule,

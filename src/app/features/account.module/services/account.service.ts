@@ -40,9 +40,9 @@ export class AccountService {
 
   public signin(name: string, password: string): Observable<string> {
     return this.apollo
-      .mutate({
-        mutation: gql`
-            mutation{
+      .query({
+        query: gql`
+            query{
               signIn(user: {
                 name: "${name}"
                 password: "${password}"

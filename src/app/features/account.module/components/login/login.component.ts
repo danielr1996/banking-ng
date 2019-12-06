@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from 'src/app/features/account.module/services/account.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {filter, mergeMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -17,14 +19,17 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private accountService: AccountService, private router: Router) {
   }
 
-  ngOnInit(): void {
-  }
+  login$: Subject<void> = new Subject<void>().pipe(
+    filter(() => this.form.valid),
+    mergeMap(() => {
+       const username: string = this.form.get(['username']).value;
+       const password: string = this.form.get(['password']).value;
+       return this.accountService.signin(username, password);
+     }),
+    mergeMap(() => this.router.navigate(['/']))
+  ) as Subject<any>;
 
-  login(): void {
-    if (this.form.valid) {
-      const username: string = this.form.get(['username']).value;
-      const password: string = this.form.get(['password']).value;
-      this.accountService.signin(username, password).subscribe(() => this.router.navigate(['/']));
-    }
+  ngOnInit(): void {
+    this.login$.subscribe();
   }
 }

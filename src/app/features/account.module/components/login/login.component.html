@@ -9,5 +9,5 @@
     <label for="password">Passwort</label>
     <input [formControlName]="'password'" type="password" class="form-control" id="password" placeholder="Passwort" autocomplete="current-password">
   </div>
-  <button type="submit" class="btn btn-primary" (click)="login()">Anmelden</button>
+  <button type="submit" class="btn btn-primary" (click)="login$.next()">Anmelden</button>
 </form>
