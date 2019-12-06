@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {CombinedComponent} from './combined/combined.component';
-import {IsLoggedInGuard} from '../../account.module/guards/is-logged-in.guard';
+import {CombinedComponent} from 'src/app/features/combined.module/components/combined/combined.component';
+import {IsLoggedInGuard} from 'src/app/features/account.module/guards/is-logged-in.guard';
 
 @NgModule({
   imports: [

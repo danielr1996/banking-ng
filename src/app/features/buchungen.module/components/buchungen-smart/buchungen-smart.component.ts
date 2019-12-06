@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {combineLatest, merge, Observable, of, Subject, zip} from 'rxjs';
+import {combineLatest, merge, Observable, of, Subject} from 'rxjs';
 import {filter, flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
-import {Buchung} from '../../model/buchung';
-import {BuchungContainer} from '../../buchung-container';
-import {BuchungenService} from '../../services/buchungen.service';
-import {KontoService} from '../../../konto.module/components/konto.service';
-import {KontoQuery} from '../../../konto.module/store/konto.store';
+import {Buchung} from 'src/app/features/buchungen.module/model/buchung';
+import {BuchungContainer} from 'src/app/features/buchungen.module/buchung-container';
+import {BuchungenService} from 'src/app/features/buchungen.module/services/buchungen.service';
+import {KontoQuery} from 'src/app/features/konto.module/store/konto.store';
 
 @Component({
   selector: 'app-buchungen-smart',

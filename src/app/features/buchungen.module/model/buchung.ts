@@ -1,5 +1,5 @@
-import {Transaktionspartner} from './transaktionspartner';
-import {Konto} from 'src/app/features/konto.module/components/konto';
+import {Konto} from 'src/app/features/konto.module/model/konto';
+import {Transaktionspartner} from 'src/app/features/buchungen.module/model/transaktionspartner';
 
 export class Buchung {
   constructor(

@@ -1,4 +1,4 @@
-import {Saldo} from './saldo';
+import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 
 export class SaldiContainer {
   constructor(

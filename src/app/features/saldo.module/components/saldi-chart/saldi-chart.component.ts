@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ChartEvent, ChartType} from 'ng-chartist';
-import {Saldo} from '../../model/saldo';
 import {format} from 'date-fns';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import * as Chartist from 'chartist';
 import 'chartist-plugin-tooltip';
 import 'chartist-plugin-pointlabels';
+import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 
 @Component({
   selector: 'app-saldi-chart',

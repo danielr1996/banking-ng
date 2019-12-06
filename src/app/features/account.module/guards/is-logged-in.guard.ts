@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
-import {AccountService} from '../services/account.service';
-import {UserQuery} from '../store/user.store';
 import {tap} from 'rxjs/operators';
+import {UserQuery} from 'src/app/features/account.module/store/user.store';
 
 @Injectable({
   providedIn: 'root'

@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {catchError, pluck, tap} from 'rxjs/operators';
-import {Observable, of, throwError} from 'rxjs';
-import {Buchung} from '../model/buchung';
-import {BuchungContainer} from '../buchung-container';
+import {catchError, pluck} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {BuchungContainer} from 'src/app/features/buchungen.module/buchung-container';
 
 @Injectable({
   providedIn: 'root'

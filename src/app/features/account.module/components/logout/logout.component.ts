@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserQuery, UserStore} from '../../store/user.store';
+import {UserQuery, UserStore} from 'src/app/features/account.module/store/user.store';
 
 @Component({
   selector: 'app-logout',

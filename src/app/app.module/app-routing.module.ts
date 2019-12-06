@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {IsLoggedInGuard} from '../features/account.module/guards/is-logged-in.guard';
+import {DashboardComponent} from 'src/app/app.module/dashboard/dashboard.component';
+import {IsLoggedInGuard} from 'src/app/features/account.module/guards/is-logged-in.guard';
 
 @NgModule({
   imports: [

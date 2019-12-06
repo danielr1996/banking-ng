@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RefreshComponent} from './components/refresh/refresh.component';
+import {RefreshComponent} from 'src/app/features/refresh/components/refresh/refresh.component';
 
 @NgModule({
   declarations: [

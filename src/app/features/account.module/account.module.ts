@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
-import {LoginComponent} from './components/login/login.component';
-import {RegisterComponent} from './components/register/register.component';
 import {AccountRoutingModule} from 'src/app/features/account.module/account-routing';
 import {CommonsModule} from 'src/app/commons.module/commons.module';
-import {LogoutComponent} from './components/logout/logout.component';
 import {AuthenticationInterceptor} from 'src/app/features/account.module/interceptors/authentication.interceptor';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {LoginComponent} from 'src/app/features/account.module/components/login/login.component';
+import {LogoutComponent} from 'src/app/features/account.module/components/logout/logout.component';
+import {RegisterComponent} from 'src/app/features/account.module/components/register/register.component';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent, LogoutComponent],

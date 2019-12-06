@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {map, pluck, tap} from 'rxjs/operators';
+import {pluck} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {Buchung} from '../../buchungen.module/model/buchung';
-import {Saldo} from '../model/saldo';
-import {SaldiContainer} from '../model/saldi-container';
+import {Saldo} from 'src/app/features/saldo.module/model/saldo';
+import {SaldiContainer} from 'src/app/features/saldo.module/model/saldi-container';
 
 @Injectable({
   providedIn: 'root'

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KontoSelectionComponent } from './konto-selection.component';
+import { KontoSelectionComponentDumb } from './konto-selection-component.component';
 
 describe('KontoSelectionComponent', () => {
-  let component: KontoSelectionComponent;
-  let fixture: ComponentFixture<KontoSelectionComponent>;
+  let component: KontoSelectionComponentDumb;
+  let fixture: ComponentFixture<KontoSelectionComponentDumb>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KontoSelectionComponent ]
+      declarations: [ KontoSelectionComponentDumb ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KontoSelectionComponent);
+    fixture = TestBed.createComponent(KontoSelectionComponentDumb);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

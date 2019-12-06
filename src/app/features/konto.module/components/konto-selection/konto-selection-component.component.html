@@ -3,7 +3,7 @@
   <li *ngFor="let konto of konten$|async">{{konto?.kontonummer}}</li>
 </ul>
 -->
-<select [formControl]="form" class="custom-select">
+<select *ngIf="isLoggedIn$ | async" [formControl]="form" class="custom-select">
   <option [value]="this.konten$ | async | selection">Alle Konten</option>
   <option *ngFor="let konto of konten$|async" [value]="konto.id | selection">{{konto?.kontonummer}}</option>
 </select>

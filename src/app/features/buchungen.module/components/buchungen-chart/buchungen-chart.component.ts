@@ -1,12 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
-import {ChartEvent, ChartType} from "ng-chartist";
-import {map} from "rxjs/operators";
-import {format} from "date-fns";
+import {Observable} from 'rxjs';
+import {ChartEvent, ChartType} from 'ng-chartist';
+import {map} from 'rxjs/operators';
+import {format} from 'date-fns';
 import * as Chartist from 'chartist';
 import 'chartist-plugin-tooltip';
 import 'chartist-plugin-pointlabels';
-import {Buchung} from "../../model/buchung";
+import {Buchung} from 'src/app/features/buchungen.module/model/buchung';
 
 @Component({
   selector: 'app-buchungen-chart',

@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {combineLatest, merge, Observable, of, Subject} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
-import {Buchung} from '../../../buchungen.module/model/buchung';
-import {BuchungContainer} from '../../../buchungen.module/buchung-container';
-import {Saldo} from '../../../saldo.module/model/saldo';
-import {BuchungenService} from '../../../buchungen.module/services/buchungen.service';
-import {SaldoService} from '../../../saldo.module/services/saldo.service';
-import {KontoQuery} from '../../../konto.module/store/konto.store';
+import {Buchung} from 'src/app/features/buchungen.module/model/buchung';
+import {BuchungContainer} from 'src/app/features/buchungen.module/buchung-container';
+import {Saldo} from 'src/app/features/saldo.module/model/saldo';
+import {BuchungenService} from 'src/app/features/buchungen.module/services/buchungen.service';
+import {SaldoService} from 'src/app/features/saldo.module/services/saldo.service';
+import {KontoQuery} from 'src/app/features/konto.module/store/konto.store';
 
 @Component({
   selector: 'app-combined-smart',
@@ -61,7 +61,7 @@ export class CombinedSmartComponent implements OnInit {
   readonly saldi$: Observable<Saldo[]> = this.page$.pipe(
     flatMap((page: number) => this.saldoService.getSaldi(page, this.ITEMS_PER_PAGE)),
     pluck('saldi')
-  )
+  );
 
   constructor(private buchungenService: BuchungenService, private saldoService: SaldoService, private kontoQuery: KontoQuery) {
   }
