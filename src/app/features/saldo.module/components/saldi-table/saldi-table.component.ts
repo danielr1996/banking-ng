@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Saldo} from '../../model/saldo';
+import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 
 @Component({
   selector: 'app-saldi-table',

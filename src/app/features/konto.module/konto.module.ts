@@ -1,15 +1,18 @@
 import {NgModule} from '@angular/core';
-import {CommonsModule} from '../../commons.module/commons.module';
-import {KontoSelectionComponent} from './components/konto-selection/konto-selection.component';
-import { SelectionPipe } from './pipes/selection.pipe';
+import {SelectionPipe} from 'src/app/features/konto.module/pipes/selection.pipe';
+import {
+  OuterKontoSelectionComponent,
+  InnerKontoSelectionComponent
+} from 'src/app/features/konto.module/components/konto-selection/konto-selection-component.component';
+import {CommonsModule} from 'src/app/commons.module/commons.module';
 
 @NgModule({
-  declarations: [KontoSelectionComponent, SelectionPipe],
+  declarations: [SelectionPipe, InnerKontoSelectionComponent, OuterKontoSelectionComponent],
   imports: [
     CommonsModule,
   ],
   exports: [
-    KontoSelectionComponent
+    OuterKontoSelectionComponent
   ]
 })
 export class KontoModule {

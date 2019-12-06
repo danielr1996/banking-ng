@@ -1,17 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
-import {BuchungContainer} from '../../buchungen.module/buchung-container';
+import {Observable, of} from 'rxjs';
 import gql from 'graphql-tag';
-import {catchError, filter, pluck} from 'rxjs/operators';
-import {Konto} from './konto';
-import {AccountService} from '../../account.module/services/account.service';
+import {catchError, pluck} from 'rxjs/operators';
+import {Konto} from 'src/app/features/konto.module/model/konto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class KontoService {
-  // public selectedKontos$: BehaviorSubject<string[]> = new BehaviorSubject(this.selectedKontos);
 
   constructor(private apollo: Apollo) {
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {RefreshService} from '../../services/refresh.service';
 import * as uuid from 'uuid';
+import {RefreshService} from 'src/app/features/refresh/services/refresh.service';
 
 // FIXME
 (window as any).global = window;

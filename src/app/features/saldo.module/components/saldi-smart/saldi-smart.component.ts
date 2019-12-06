@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {SaldoService} from '../../services/saldo.service';
-import {Saldo} from '../../model/saldo';
 import {merge, Observable, of, Subject} from 'rxjs';
 import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
-import {SaldiContainer} from '../../model/saldi-container';
+import {Saldo} from 'src/app/features/saldo.module/model/saldo';
+import {SaldiContainer} from 'src/app/features/saldo.module/model/saldi-container';
+import {SaldoService} from 'src/app/features/saldo.module/services/saldo.service';
 
 @Component({
   selector: 'app-saldi-smart',

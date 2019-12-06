@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {SaldoService} from '../../services/saldo.service';
-import {Saldo} from '../../model/saldo';
+import {Saldo} from 'src/app/features/saldo.module/model/saldo';
+import {SaldoService} from 'src/app/features/saldo.module/services/saldo.service';
+import {UserQuery} from 'src/app/features/account.module/store/user.store';
 
 @Component({
   selector: 'app-saldo',
@@ -10,8 +11,11 @@ import {Saldo} from '../../model/saldo';
 })
 export class SaldoComponent implements OnInit {
   readonly saldo$: Observable<Saldo> = this.saldoService.getSaldo();
-
-  constructor(private saldoService: SaldoService) {
+  readonly isLoggedIn$: Observable<boolean> = this.userQuery.isLoggedIn$;
+  constructor(
+    private saldoService: SaldoService,
+    private userQuery: UserQuery,
+  ) {
   }
 
   ngOnInit(): void {

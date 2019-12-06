@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
-import {BuchungenComponent} from './components/buchungen/buchungen.component';
 import {RouterModule} from '@angular/router';
-import {IsLoggedInGuard} from '../account.module/guards/is-logged-in.guard';
+import {BuchungenComponent} from 'src/app/features/buchungen.module/components/buchungen/buchungen.component';
+import {IsLoggedInGuard} from 'src/app/features/account.module/guards/is-logged-in.guard';
 
 @NgModule({
   imports: [

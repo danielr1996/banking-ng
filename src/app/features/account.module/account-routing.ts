@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import {RouterModule} from '@angular/router';
+import {LoginComponent} from 'src/app/features/account.module/components/login/login.component';
+import {RegisterComponent} from 'src/app/features/account.module/components/register/register.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
