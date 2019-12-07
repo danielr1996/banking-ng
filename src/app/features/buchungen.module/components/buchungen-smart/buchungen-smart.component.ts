@@ -46,9 +46,7 @@ export class BuchungenSmartComponent implements OnInit {
     }),
   );
 
-
   readonly buchungen$: Observable<Buchung[]> = combineLatest(this.page$, this.konto$.pipe(filter(v => v !== null && v !== undefined))).pipe(
-    // tap(([page, konto]) => console.log(page, konto)),
     flatMap(([page, konto]) => this.buchungenService.getBuchungen(konto, page, this.ITEMS_PER_PAGE)),
     tap((container: BuchungContainer) => {
       this.totalPages = container.totalPages;
