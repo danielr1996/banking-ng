@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {merge, Observable, of, Subject} from 'rxjs';
-import {flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
+import {combineLatest, merge, Observable, of, Subject} from 'rxjs';
+import {filter, flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
 import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 import {SaldiContainer} from 'src/app/features/saldo.module/model/saldi-container';
 import {SaldoService} from 'src/app/features/saldo.module/services/saldo.service';
+import {KontoQuery} from 'src/app/features/konto.module/store/konto.store';
 
 @Component({
   selector: 'app-saldi-smart',
@@ -14,6 +15,7 @@ export class SaldiSmartComponent implements OnInit {
   readonly ITEMS_PER_PAGE: number = 10;
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
+  readonly konto$: Observable<string[]> = this.kontoQuery.kontos$;
   private totalPages: number;
   private totalElements: number;
   public style: 'table' | 'chart' = 'table';
@@ -44,8 +46,8 @@ export class SaldiSmartComponent implements OnInit {
     })
   );
 
-  public saldi$: Observable<Saldo[]> = this.page$.pipe(
-    flatMap((page: number) => this.saldoService.getSaldi(page, this.ITEMS_PER_PAGE)),
+  public saldi$: Observable<Saldo[]> = combineLatest(this.page$, this.konto$.pipe(filter(v => v !== null && v !== undefined))).pipe(
+    flatMap(([page, kontoIds]) => this.saldoService.getSaldi(kontoIds, page, this.ITEMS_PER_PAGE)),
     tap((container: SaldiContainer) => {
       this.totalPages = container.totalPages;
       this.totalElements = container.totalElements;
@@ -53,7 +55,9 @@ export class SaldiSmartComponent implements OnInit {
     pluck('saldi')
   );
 
-  constructor(private saldoService: SaldoService) {
+  constructor(
+    private saldoService: SaldoService,
+    private kontoQuery: KontoQuery) {
   }
 
   ngOnInit(): void {

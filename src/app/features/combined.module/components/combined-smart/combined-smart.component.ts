@@ -58,8 +58,8 @@ export class CombinedSmartComponent implements OnInit {
     pluck('buchungen')
   );
 
-  readonly saldi$: Observable<Saldo[]> = this.page$.pipe(
-    flatMap((page: number) => this.saldoService.getSaldi(page, this.ITEMS_PER_PAGE)),
+  readonly saldi$: Observable<Saldo[]> = combineLatest(this.page$, this.konto$).pipe(
+    flatMap(([page, kontoIds]) => this.saldoService.getSaldi(kontoIds, page, this.ITEMS_PER_PAGE)),
     pluck('saldi')
   );
 

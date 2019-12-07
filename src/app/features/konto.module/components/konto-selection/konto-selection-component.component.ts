@@ -34,7 +34,6 @@ export class InnerKontoSelectionComponent implements OnInit {
     combineLatest(this.kontoQuery.kontos$, this.konten$).pipe(
       distinctUntilChanged(),
       tap(([selectedKontos, availableKontos]) => {
-        console.log();
         let newSelection: string[];
         if (_.intersection(selectedKontos, availableKontos.map(konto => konto.id)).length === 0) {
           newSelection = availableKontos.map(konto => konto.id);
