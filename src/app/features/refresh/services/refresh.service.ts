@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {catchError} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {catchError, mergeMap, tap} from 'rxjs/operators';
+import {Observable, of, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +10,19 @@ import {Observable, of} from 'rxjs';
 export class RefreshService {
 
   constructor(private apollo: Apollo) {
-
+    this.refresh$.subscribe();
   }
 
-  public refresh(userId: string, rpcId: string): Observable<void> {
+  public refresh$: Subject<{ userId: string, rpcId: string }> = new Subject<any>().pipe(
+    mergeMap(({userId, rpcId}) => this.refresh(userId, rpcId))
+  ) as Subject<any>;
+
+
+  private refresh(userId: string, rpcId: string): Observable<any> {
     return this.apollo
-      .mutate({
-        mutation: gql`
-            mutation{
+      .query({
+        query: gql`
+            query{
               refresh(username: "${userId}", rpcId: "${rpcId}")
             }
         `,

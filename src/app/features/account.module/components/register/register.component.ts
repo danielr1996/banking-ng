@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       const username: string = this.form.get(['username']).value;
       const password: string = this.form.get(['password']).value;
-      this.accountService.register(username, password).subscribe(console.log);
+      this.accountService.register(username, password).subscribe();
     }
   }
 }

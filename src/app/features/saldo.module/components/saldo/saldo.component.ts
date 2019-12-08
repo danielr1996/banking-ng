@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {combineLatest, merge, Observable} from 'rxjs';
 import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 import {SaldoService} from 'src/app/features/saldo.module/services/saldo.service';
 import {UserQuery} from 'src/app/features/account.module/store/user.store';
 import {KontoQuery} from 'src/app/features/konto.module/store/konto.store';
-import {mergeMap, tap} from 'rxjs/operators';
+import {mergeMap, startWith, tap, withLatestFrom} from 'rxjs/operators';
+import {RefreshService} from 'src/app/features/refresh/services/refresh.service';
 
 @Component({
   selector: 'app-saldo',
@@ -12,14 +13,19 @@ import {mergeMap, tap} from 'rxjs/operators';
   styleUrls: ['./saldo.component.scss']
 })
 export class SaldoComponent implements OnInit {
-  readonly kontoId$: Observable<string[]> = this.kontoQuery.kontos$.pipe(tap(console.log));
-  readonly saldo$: Observable<Saldo> = this.kontoId$.pipe(mergeMap(kontoIds => this.saldoService.getSaldo(kontoIds)));
+  readonly kontoIds$: Observable<string[]> = this.kontoQuery.kontos$;
+  readonly refresh$: Observable<any> = this.refreshService.refresh$.pipe(startWith(null));
+  readonly saldo$: Observable<Saldo> = combineLatest(this.kontoIds$, this.refresh$).pipe(
+    mergeMap(([kontoIds]) => this.saldoService.getSaldo(kontoIds)),
+    tap((saldo) => console.log(saldo)),
+  );
   readonly isLoggedIn$: Observable<boolean> = this.userQuery.isLoggedIn$;
 
   constructor(
     private saldoService: SaldoService,
     private userQuery: UserQuery,
     private kontoQuery: KontoQuery,
+    private refreshService: RefreshService,
   ) {
   }
 

@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {combineLatest, merge, Observable, of, Subject} from 'rxjs';
-import {filter, flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
+import {filter, flatMap, map, mapTo, pluck, scan, startWith, tap} from 'rxjs/operators';
 import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 import {SaldiContainer} from 'src/app/features/saldo.module/model/saldi-container';
 import {SaldoService} from 'src/app/features/saldo.module/services/saldo.service';
 import {KontoQuery} from 'src/app/features/konto.module/store/konto.store';
+import {RefreshService} from 'src/app/features/refresh/services/refresh.service';
 
 @Component({
   selector: 'app-saldi-smart',
@@ -16,6 +17,7 @@ export class SaldiSmartComponent implements OnInit {
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
   readonly konto$: Observable<string[]> = this.kontoQuery.kontos$;
+  readonly refresh$: Observable<any> = this.refreshService.refresh$.pipe(startWith(null));
   private totalPages: number;
   private totalElements: number;
   public style: 'table' | 'chart' = 'table';
@@ -46,7 +48,11 @@ export class SaldiSmartComponent implements OnInit {
     })
   );
 
-  public saldi$: Observable<Saldo[]> = combineLatest(this.page$, this.konto$.pipe(filter(v => v !== null && v !== undefined))).pipe(
+  public saldi$: Observable<Saldo[]> = combineLatest(
+    this.page$,
+    this.konto$.pipe(filter(v => v !== null && v !== undefined)),
+    this.refresh$
+  ).pipe(
     flatMap(([page, kontoIds]) => this.saldoService.getSaldi(kontoIds, page, this.ITEMS_PER_PAGE)),
     tap((container: SaldiContainer) => {
       this.totalPages = container.totalPages;
@@ -57,7 +63,8 @@ export class SaldiSmartComponent implements OnInit {
 
   constructor(
     private saldoService: SaldoService,
-    private kontoQuery: KontoQuery) {
+    private kontoQuery: KontoQuery,
+    private refreshService: RefreshService) {
   }
 
   ngOnInit(): void {
