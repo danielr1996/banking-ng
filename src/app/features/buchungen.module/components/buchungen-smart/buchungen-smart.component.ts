@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {combineLatest, merge, Observable, of, Subject} from 'rxjs';
-import {filter, flatMap, map, mapTo, pluck, scan, tap} from 'rxjs/operators';
+import {filter, flatMap, map, mapTo, pluck, scan, startWith, tap} from 'rxjs/operators';
 import {Buchung} from 'src/app/features/buchungen.module/model/buchung';
 import {BuchungContainer} from 'src/app/features/buchungen.module/buchung-container';
 import {BuchungenService} from 'src/app/features/buchungen.module/services/buchungen.service';
 import {KontoQuery} from 'src/app/features/konto.module/store/konto.store';
+import {RefreshService} from 'src/app/features/refresh/services/refresh.service';
 
 @Component({
   selector: 'app-buchungen-smart',
@@ -16,6 +17,7 @@ export class BuchungenSmartComponent implements OnInit {
   readonly prev$: Subject<number> = new Subject();
   readonly next$: Subject<number> = new Subject();
   readonly konto$: Observable<string[]> = this.kontoQuery.kontos$;
+  readonly refresh$: Observable<any> = this.refreshService.refresh$.pipe(startWith(null));
   private totalPages: number;
   private totalElements: number;
   public style: 'table' | 'chart' = 'table';
@@ -46,7 +48,11 @@ export class BuchungenSmartComponent implements OnInit {
     }),
   );
 
-  readonly buchungen$: Observable<Buchung[]> = combineLatest(this.page$, this.konto$.pipe(filter(v => v !== null && v !== undefined))).pipe(
+  readonly buchungen$: Observable<Buchung[]> = combineLatest(
+    this.page$,
+    this.konto$.pipe(filter(v => v !== null && v !== undefined)),
+    this.refresh$
+  ).pipe(
     flatMap(([page, konto]) => this.buchungenService.getBuchungen(konto, page, this.ITEMS_PER_PAGE)),
     tap((container: BuchungContainer) => {
       this.totalPages = container.totalPages;
@@ -55,7 +61,7 @@ export class BuchungenSmartComponent implements OnInit {
     pluck('buchungen'),
   );
 
-  constructor(private buchungenService: BuchungenService, private kontoQuery: KontoQuery) {
+  constructor(private buchungenService: BuchungenService, private kontoQuery: KontoQuery, private refreshService: RefreshService) {
   }
 
   ngOnInit(): void {

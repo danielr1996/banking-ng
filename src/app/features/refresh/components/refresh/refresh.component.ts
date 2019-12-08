@@ -27,9 +27,7 @@ export class RefreshComponent implements OnInit {
 
   public refresh$: Subject<void> = new Subject<void>().pipe(
     mergeMap(() => this.user$),
-    mergeMap((userId) => this.refreshService.refresh(userId, this.rpcId)),
-    tap(() => console.log('Data refreshed')),
-    // TODO: Reload Data
+    tap((userId) => this.refreshService.refresh$.next({userId, rpcId: this.rpcId})),
   ) as Subject<any>;
 
   ngOnInit(): void {

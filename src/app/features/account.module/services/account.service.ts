@@ -20,7 +20,7 @@ export class AccountService {
             mutation{
               createUser(user: {
                 name: "${username}"
-                password: "${password}"
+                passwordhash: "${password}"
               }){
                 name
               }
@@ -29,6 +29,7 @@ export class AccountService {
       })
       .pipe(
         pluck('data', 'createUser'),
+        tap(console.log),
         catchError((err: Error) => {
           console.error('Error executing query', err);
           return of(err);
@@ -36,7 +37,7 @@ export class AccountService {
       ) as Observable<{ id: string, name: string }>;
   }
 
-  public signin(name: string, password: string): Observable<string> {
+  public signin(name: string, password: string): Observable<string | Error> {
     return this.apollo
       .query({
         query: gql`
@@ -50,10 +51,8 @@ export class AccountService {
       })
       .pipe(
         pluck('data', 'signIn'),
-        tap((token) => console.log(`Token obtained ${token}`)),
         tap((token: any) => this.userStore.update(state => ({token}))),
         mergeMap(() => this.userQuery.token$),
-        tap((token: any) => console.log(token)),
         catchError((err: Error) => {
           console.error('Error executing query', err);
           return of(err);

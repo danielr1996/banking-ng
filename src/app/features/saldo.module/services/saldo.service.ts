@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {pluck} from 'rxjs/operators';
+import {pluck, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 import {SaldiContainer} from 'src/app/features/saldo.module/model/saldi-container';
@@ -30,6 +30,7 @@ export class SaldoService {
       })
       .valueChanges
       .pipe(
+        tap(() => console.log('saldo queried')),
         pluck('data', 'saldo'),
       );
   }
