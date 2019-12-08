@@ -7,6 +7,7 @@ import {SaldiChartComponent} from 'src/app/features/saldo.module/components/sald
 import {SaldiTableComponent} from 'src/app/features/saldo.module/components/saldi-table/saldi-table.component';
 import {SaldiComponent} from 'src/app/features/saldo.module/components/saldi/saldi.component';
 import {SaldoRoutingModule} from 'src/app/features/saldo.module/saldo-routing.module';
+import { SaldoPipe } from './pipes/saldo.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {SaldoRoutingModule} from 'src/app/features/saldo.module/saldo-routing.mo
     SaldiSmartComponent,
     SaldiChartComponent,
     SaldiTableComponent,
-    SaldiComponent],
+    SaldiComponent,
+    SaldoPipe],
   imports: [
     CommonModule,
     ChartistModule,

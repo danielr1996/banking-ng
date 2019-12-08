@@ -43,7 +43,7 @@ export class AccountService {
             query{
               signIn(user: {
                 name: "${name}"
-                password: "${password}"
+                passwordhash: "${password}"
               })
             }
         `,

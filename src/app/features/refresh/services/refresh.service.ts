@@ -13,12 +13,12 @@ export class RefreshService {
 
   }
 
-  public refresh(rpcId: string): Observable<void> {
+  public refresh(userId: string, rpcId: string): Observable<void> {
     return this.apollo
       .mutate({
         mutation: gql`
             mutation{
-              refresh(username: "user1", rpcId: "${rpcId}")
+              refresh(username: "${userId}", rpcId: "${rpcId}")
             }
         `,
       })

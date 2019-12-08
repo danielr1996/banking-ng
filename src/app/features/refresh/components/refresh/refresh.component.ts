@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import * as uuid from 'uuid';
 import {RefreshService} from 'src/app/features/refresh/services/refresh.service';
+import {UserQuery} from 'src/app/features/account.module/store/user.store';
+import {Observable, of, Subject} from 'rxjs';
+import {mergeMap, take, tap} from 'rxjs/operators';
 
 // FIXME
 (window as any).global = window;
@@ -17,12 +20,22 @@ import {RefreshService} from 'src/app/features/refresh/services/refresh.service'
 })
 export class RefreshComponent implements OnInit {
   private rpcId: string = uuid.v4();
+  private user$: Observable<string> = this.userQuery.userId$.pipe(take(1));
 
-  constructor(private refreshService: RefreshService) {
+  constructor(private refreshService: RefreshService, private userQuery: UserQuery) {
   }
 
-  ngOnInit(): void {
+  public refresh$: Subject<void> = new Subject<void>().pipe(
+    mergeMap(() => this.user$),
+    mergeMap((userId) => this.refreshService.refresh(userId, this.rpcId)),
+    tap(() => console.log('Data refreshed')),
+    // TODO: Reload Data
+  ) as Subject<any>;
 
+  ngOnInit(): void {
+    this.refresh$.subscribe();
+
+    // FIXME
     const autobahn: any = require('autobahn');
     const connection: any = new autobahn.Connection({url: 'ws://127.0.0.1:9090/wamp', realm: 'default'});
     connection.onopen = (session: any): void => {
@@ -49,10 +62,5 @@ export class RefreshComponent implements OnInit {
       session.register(NEED_PT_SECMECH, getTanMech);
     };
     connection.open();
-  }
-
-  refresh(): void {
-    this.refreshService.refresh(this.rpcId).subscribe();
-    // TODO: Reload Data
   }
 }
