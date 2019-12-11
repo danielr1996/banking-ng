@@ -20,7 +20,7 @@ export class AccountService {
             mutation{
               createUser(user: {
                 name: "${username}"
-                passwordhash: "${password}"
+                password: "${password}"
               }){
                 name
               }
@@ -29,7 +29,6 @@ export class AccountService {
       })
       .pipe(
         pluck('data', 'createUser'),
-        tap(console.log),
         catchError((err: Error) => {
           console.error('Error executing query', err);
           return of(err);
@@ -38,13 +37,14 @@ export class AccountService {
   }
 
   public signin(name: string, password: string): Observable<string | Error> {
+    password = btoa(password);
     return this.apollo
       .query({
         query: gql`
             query{
               signIn(user: {
                 name: "${name}"
-                passwordhash: "${password}"
+                password: "${password}"
               })
             }
         `,
