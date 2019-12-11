@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {Observable, of} from 'rxjs';
 import gql from 'graphql-tag';
-import {catchError, pluck} from 'rxjs/operators';
+import {catchError, pluck, tap} from 'rxjs/operators';
 import {Konto} from 'src/app/features/konto.module/model/konto';
 
 @Injectable({
@@ -30,6 +30,34 @@ export class KontoService {
       .valueChanges
       .pipe(
         pluck('data', 'konto'),
+        catchError((err) => {
+          console.error('Connection cannot be established');
+          return of(err);
+        })
+      );
+  }
+
+  public createKonto(userId: string, konto: Konto): Observable<Konto> {
+    return this.apollo
+      .mutate({
+        mutation: gql`
+          {
+            createKonto(konto: {
+              blz:"blz",
+              password:"password"
+            }){
+              blz
+              id
+              kontonummer
+              secmech
+              tanmedia
+            }
+          }
+        `,
+      })
+      .pipe(
+        pluck('data', 'konto'),
+        tap(console.log),
         catchError((err) => {
           console.error('Connection cannot be established');
           return of(err);
