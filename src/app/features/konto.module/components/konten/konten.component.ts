@@ -4,25 +4,32 @@ import {Observable, Subject} from 'rxjs';
 import {Konto} from 'src/app/features/konto.module/model/konto';
 import {KontoService} from 'src/app/features/konto.module/services/konto.service';
 import {UserQuery} from 'src/app/features/account.module/store/user.store';
-import {mergeMap} from 'rxjs/operators';
+import {mergeMap, tap} from 'rxjs/operators';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {v4 as uuid} from 'uuid';
 
 @Component({
   selector: 'app-konten',
   templateUrl: './konten.component.html',
   styleUrls: ['./konten.component.scss']
 })
-export class KontenComponent {
-  // public konten$: Observable<Konto[]> = this.kontoQuery.konten$;
-  public konten$: Observable<Konto[]> = this.userQuery.userId$.pipe(mergeMap(userId => this.kontoService.getKonten(userId)));
-  public create$: Subject<void> = new Subject<void>().pipe(
-    // this.kontoService.createKonto()
-  ) as Subject<any>;
+export class KontenComponent implements OnInit {
   public form: FormGroup = this.fb.group({
     blz: this.fb.control([null]),
     kontonummer: this.fb.control([null]),
+    password: this.fb.control([null])
   });
+  public konten$: Observable<Konto[]> = this.kontoQuery.konten$;
+
+  public create$: Subject<void> = new Subject<void>().pipe(
+    mergeMap(userId => this.kontoService.createKonto(this.form.value)),
+  ) as Subject<any>;
+
 
   constructor(private fb: FormBuilder, private kontoQuery: KontoQuery, private userQuery: UserQuery, private kontoService: KontoService) {
+  }
+
+  ngOnInit(): void {
+    this.create$.subscribe();
   }
 }

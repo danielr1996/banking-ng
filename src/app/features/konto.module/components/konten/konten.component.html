@@ -3,6 +3,7 @@
 </ul>
 <form [formGroup]="form">
   BLZ: <input type="text" [formControlName]="'blz'"><br>
-  Kontonummer: <input type="text" [formControlName]="'kontonummer'">
-  <button type="submit" class="btn btn-primary" (click)="create$.next()">Anmelden</button>
+  Kontonummer: <input type="text" [formControlName]="'kontonummer'"><br>
+  Pin: <input type="text" [formControlName]="'password'"><br>
+  <button type="submit" class="btn btn-primary" (click)="create$.next()">Erstellen</button>
 </form>

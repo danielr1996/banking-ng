@@ -37,14 +37,18 @@ export class KontoService {
       );
   }
 
-  public createKonto(userId: string, konto: Konto): Observable<Konto> {
+  public createKonto(konto: Konto): Observable<Konto> {
     return this.apollo
       .mutate({
         mutation: gql`
-          {
+          mutation{
             createKonto(konto: {
-              blz:"blz",
-              password:"password"
+              bic:""
+              secmech:""
+              tanmedia:""
+              blz:"${konto.blz}",
+              password:"${konto.password}"
+              kontonummer: "${konto.kontonummer}"
             }){
               blz
               id
