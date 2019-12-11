@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {UserQuery} from 'src/app/features/account.module/store/user.store';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,6 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor(public userQuery: UserQuery) {
+  }
 }

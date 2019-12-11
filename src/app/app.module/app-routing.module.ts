@@ -23,6 +23,10 @@ import {IsLoggedInGuard} from 'src/app/features/account.module/guards/is-logged-
         loadChildren: () => import('../features/account.module/account.module').then(m => m.AccountModule)
       },
       {
+        path: 'konten',
+        loadChildren: () => import('../features/konto.module/konto.module').then(m => m.KontoModule)
+      },
+      {
         path: '', children: [
           {
             path: '', component: DashboardComponent,

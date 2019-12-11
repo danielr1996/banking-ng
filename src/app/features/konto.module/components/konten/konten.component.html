@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let konto of konten$ | async">{{konto | json}}</li>
+</ul>
+<form [formGroup]="form">
+  BLZ: <input type="text" [formControlName]="'blz'"><br>
+  Kontonummer: <input type="text" [formControlName]="'kontonummer'">
+  <button type="submit" class="btn btn-primary" (click)="create$.next()">Anmelden</button>
+</form>

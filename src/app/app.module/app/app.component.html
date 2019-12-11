@@ -8,46 +8,35 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" [routerLink]="'buchungen'">Buchungen</a>
-        </li>
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" [routerLink]="'saldi'" routerLinkActive #rla="routerLinkActive">Saldi</a>
-        </li>
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" [routerLink]="'combined'" routerLinkActive #rla="routerLinkActive">Kombiniert</a>
-        </li>
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" [routerLink]="['account','login']" routerLinkActive #rla="routerLinkActive">Anmelden</a>
-        </li>
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" [routerLink]="['account','register']" routerLinkActive #rla="routerLinkActive">Registrieren</a>
-        </li>
-        <!--
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-             aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>-->
+        <ng-container *ngIf="userQuery.isLoggedIn$ | async; else notLoggedIn">
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="'buchungen'">Buchungen</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="'saldi'" routerLinkActive #rla="routerLinkActive">Saldi</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="'combined'" routerLinkActive #rla="routerLinkActive">Kombiniert</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="'konten'" routerLinkActive #rla="routerLinkActive">Konten</a>
+          </li>
+        </ng-container>
+        <ng-template #notLoggedIn>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="['account','login']" routerLinkActive #rla="routerLinkActive">Anmelden</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="['account','register']" routerLinkActive #rla="routerLinkActive">Registrieren</a>
+          </li>
+        </ng-template>
       </ul>
-      <app-konto-selection class="margin-right-10"></app-konto-selection>
-      <app-logout></app-logout>
-      <app-saldo></app-saldo>
-      <!--<form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>-->
-      <app-refresh></app-refresh>
+      <ng-container *ngIf="userQuery.isLoggedIn$ | async">
+        <app-konto-selection class="margin-right-10"></app-konto-selection>
+        <app-logout></app-logout>
+        <app-saldo></app-saldo>
+        <app-refresh></app-refresh>
+      </ng-container>
     </div>
   </nav>
   <router-outlet></router-outlet>

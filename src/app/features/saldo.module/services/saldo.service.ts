@@ -30,7 +30,6 @@ export class SaldoService {
       })
       .valueChanges
       .pipe(
-        tap(() => console.log('saldo queried')),
         pluck('data', 'saldo'),
       );
   }

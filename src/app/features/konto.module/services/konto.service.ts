@@ -57,7 +57,6 @@ export class KontoService {
       })
       .pipe(
         pluck('data', 'konto'),
-        tap(console.log),
         catchError((err) => {
           console.error('Connection cannot be established');
           return of(err);
