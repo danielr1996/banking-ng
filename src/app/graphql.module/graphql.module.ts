@@ -12,7 +12,7 @@ export function createApollo(httpLink: HttpLink): {} {
     defaultOptions: {
       watchQuery: {
         fetchPolicy: 'no-cache',
-        errorPolicy: 'ignore',
+        errorPolicy: 'all',
       },
       query: {
         fetchPolicy: 'no-cache',

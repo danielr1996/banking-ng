@@ -10,15 +10,9 @@ import {Observable, of, Subject} from 'rxjs';
 export class RefreshService {
 
   constructor(private apollo: Apollo) {
-    this.refresh$.subscribe();
   }
 
-  public refresh$: Subject<{ userId: string, rpcId: string }> = new Subject<any>().pipe(
-    mergeMap(({userId, rpcId}) => this.refresh(userId, rpcId))
-  ) as Subject<any>;
-
-
-  private refresh(userId: string, rpcId: string): Observable<any> {
+  public refresh(userId: string, rpcId: string): Observable<any> {
     return this.apollo
       .query({
         query: gql`

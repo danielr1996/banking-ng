@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import {catchError, pluck} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {BuchungContainer} from 'src/app/features/buchungen.module/buchung-container';
+import {Buchung} from 'src/app/features/buchungen.module/model/buchung';
 
 @Injectable({
   providedIn: 'root'
@@ -14,20 +15,21 @@ export class BuchungenService {
 
   }
 
-  public getBuchungen(kontoIds: string[], page?: number, size?: number): Observable<BuchungContainer> {
+  public getBuchungen(username: string): Observable<Buchung[]> {
     let paramQuery: string = '';
 
-    const pageQuery: string = `page: ${page},`;
-    const sizeQuery: string = `size: ${size},`;
-    const kontoQuery: string = `kontoIds: [${kontoIds.map(k => '"' + k + '"').join(',')}]`;
+    // const pageQuery: string = `page: ${page},`;
+    const userQuery: string = `username: "${username}",`;
+    // const sizeQuery: string = `size: ${size},`;
+    // const kontoQuery: string = `kontoIds: [${kontoIds.map(k => '"' + k + '"').join(',')}]`;
 
-    if (page !== undefined && size !== undefined) {
-      paramQuery = `(${kontoQuery},${pageQuery}${sizeQuery})`;
-    } else {
-      paramQuery = `${kontoQuery}`;
-    }
+    // if (page !== undefined && size !== undefined) {
+    //   paramQuery = `(${kontoQuery},${pageQuery}${sizeQuery})`;
+    // } else {
+    paramQuery = `(${userQuery})`;
+    // }
     return this.apollo
-      .watchQuery({
+      .query({
         query: gql`
           {
             buchungen${paramQuery}{
@@ -51,11 +53,10 @@ export class BuchungenService {
           }
         `,
       })
-      .valueChanges
       .pipe(
-        pluck('data', 'buchungen'),
+        pluck('data', 'buchungen', 'buchungen'),
         catchError((err) => {
-          console.error('Connection cannot be established');
+          console.error('Error executing query', err);
           return of(err);
         })
       );

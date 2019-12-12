@@ -2,8 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import * as uuid from 'uuid';
 import {RefreshService} from 'src/app/features/refresh/services/refresh.service';
 import {UserQuery} from 'src/app/features/account.module/store/user.store';
-import {Observable, of, Subject} from 'rxjs';
-import {mergeMap, take, tap} from 'rxjs/operators';
+import {merge, Observable, of, Subject} from 'rxjs';
+import {mapTo, mergeMap, take, tap} from 'rxjs/operators';
+import {KontoService} from 'src/app/features/konto.module/services/konto.service';
+import {BuchungenService} from 'src/app/features/buchungen.module/services/buchungen.service';
+import {SaldoService} from 'src/app/features/saldo.module/services/saldo.service';
+import {KontoStore} from 'src/app/features/konto.module/store/konto.store';
+import {SaldoStore} from 'src/app/features/saldo.module/store/saldo.store';
+import {BuchungenStore} from 'src/app/features/buchungen.module/store/buchungen.store';
 
 // FIXME
 (window as any).global = window;
@@ -20,14 +26,30 @@ import {mergeMap, take, tap} from 'rxjs/operators';
 })
 export class RefreshComponent implements OnInit {
   private rpcId: string = uuid.v4();
-  private user$: Observable<string> = this.userQuery.userId$.pipe(take(1));
+  private username$: Observable<string> = this.userQuery.username$.pipe(take(1));
 
-  constructor(private refreshService: RefreshService, private userQuery: UserQuery) {
+  constructor(
+    private refreshService: RefreshService,
+    private userQuery: UserQuery,
+    private kontoService: KontoService,
+    private buchungenService: BuchungenService,
+    private saldoService: SaldoService,
+    private kontoStore: KontoStore,
+    private buchungenStore: BuchungenStore,
+    private saldoStore: SaldoStore,
+  ) {
   }
 
   public refresh$: Subject<void> = new Subject<void>().pipe(
-    mergeMap(() => this.user$),
-    tap((userId) => this.refreshService.refresh$.next({userId, rpcId: this.rpcId})),
+    mergeMap(() => this.username$),
+    mergeMap((username) => this.refreshService.refresh(username, this.rpcId).pipe(mapTo(username))),
+    mergeMap(username => merge(
+      this.kontoService.getKonten(username).pipe(tap(konten => this.kontoStore.update({konten}))),
+      this.buchungenService.getBuchungen(username).pipe(tap(buchungen => this.buchungenStore.update({buchungen}))),
+      this.saldoService.getSaldi(username).pipe(tap(saldi => this.saldoStore.update({saldi}))),
+      this.saldoService.getSaldo(username).pipe(tap(saldo => this.saldoStore.update({saldo}))),
+    )),
+    tap((data) => console.log('Data refreshed', data))
   ) as Subject<any>;
 
   ngOnInit(): void {

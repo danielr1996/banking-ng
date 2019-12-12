@@ -17,7 +17,7 @@ import {KontoQuery, KontoStore} from 'src/app/features/konto.module/store/konto.
 export class InnerKontoSelectionComponent implements OnInit {
   readonly form: FormControl = this.fb.control([null]);
   readonly isLoggedIn$: Observable<boolean> = this.userQuery.isLoggedIn$;
-  readonly konten$: Observable<Konto[]> = this.userQuery.userId$.pipe(
+  readonly konten$: Observable<Konto[]> = this.userQuery.username$.pipe(
     flatMap(currentUser => this.kontoService.getKonten(currentUser)),
   );
 
@@ -31,7 +31,7 @@ export class InnerKontoSelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    combineLatest(this.kontoQuery.kontos$, this.konten$).pipe(
+    /*combineLatest(this.kontoQuery.kontos$, this.konten$).pipe(
       distinctUntilChanged(),
       tap(([selectedKontos, availableKontos]) => {
         let newSelection: string[];
@@ -48,7 +48,7 @@ export class InnerKontoSelectionComponent implements OnInit {
       distinctUntilChanged(),
       map(kontoId => JSON.parse(kontoId)),
       tap((kontos: string[]) => this.kontoStore.update(state => ({kontos}))),
-    ).subscribe();
+    ).subscribe();*/
   }
 }
 

@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import gql from 'graphql-tag';
 import {catchError, pluck, tap} from 'rxjs/operators';
 import {Konto} from 'src/app/features/konto.module/model/konto';
+import {v4 as uuid} from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -14,24 +15,47 @@ export class KontoService {
 
   }
 
-  public getKonten(userId: string): Observable<Konto[]> {
+  public getKonten(username: string): Observable<Konto[]> {
     return this.apollo
-      .watchQuery({
+      .query({
         query: gql`
           {
-            konto(userId: "${userId}"){
+            konten(username: "${username}"){
               id
               blz
               kontonummer
+              bankaccount
+              tanmedia
+              secmech
+              active
            }
           }
         `,
       })
-      .valueChanges
       .pipe(
-        pluck('data', 'konto'),
+        pluck('data', 'konten'),
         catchError((err) => {
-          console.error('Connection cannot be established');
+          console.error('Error executing query', err);
+          return of(err);
+        })
+      );
+  }
+
+  public deleteKonto(kontoId: string): Observable<Konto> {
+    return this.apollo
+      .query({
+        query: gql`
+          {
+            deleteKonto(kontoId: "${kontoId}"){
+              id
+           }
+          }
+        `,
+      })
+      .pipe(
+        pluck('data', 'deleteKonto'),
+        catchError((err) => {
+          console.error('Error executing query', err);
           return of(err);
         })
       );
@@ -39,30 +63,33 @@ export class KontoService {
 
   public createKonto(konto: Konto): Observable<Konto> {
     return this.apollo
-      .mutate({
-        mutation: gql`
-          mutation{
+      .query({
+        query: gql`
+          query{
             createKonto(konto: {
-              bic:""
-              secmech:""
-              tanmedia:""
+              id: "${uuid()}"
+              secmech:"${konto.secmech}"
+              tanmedia:"${konto.tanmedia}"
               blz:"${konto.blz}",
               password:"${konto.password}"
               kontonummer: "${konto.kontonummer}"
+              bankaccount: "${konto.bankaccount}"
             }){
-              blz
               id
+              blz
               kontonummer
               secmech
+              bankaccount
               tanmedia
+              active
             }
           }
-        `,
+        `
       })
       .pipe(
         pluck('data', 'konto'),
         catchError((err) => {
-          console.error('Connection cannot be established');
+          console.error('Error executing query', err);
           return of(err);
         })
       );
