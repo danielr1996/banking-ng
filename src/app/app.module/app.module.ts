@@ -3,9 +3,9 @@ import {NgModule} from '@angular/core';
 
 import {environment} from 'src/environments/environment';
 import {AppRoutingModule} from 'src/app/app.module/app-routing.module';
-import {AppComponent} from 'src/app/app.module/app/app.component';
-import {DashboardComponent} from 'src/app/app.module/dashboard/dashboard.component';
-import {ErrorComponent} from 'src/app/app.module/error/error.component';
+import {AppComponent} from 'src/app/app.module/components/app/app.component';
+import {DashboardComponent} from 'src/app/app.module/components/dashboard/dashboard.component';
+import {ErrorComponent} from 'src/app/app.module/components/error/error.component';
 import {GraphQLModule} from 'src/app/graphql.module/graphql.module';
 import {HttpClientModule} from '@angular/common/http';
 import {RefreshModule} from 'src/app/features/refresh/refresh.module';

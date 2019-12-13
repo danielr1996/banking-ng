@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {UserQuery} from 'src/app/features/account.module/store/user.store';
 import {KontoService} from 'src/app/features/konto.module/services/konto.service';
-import {mergeAll, mergeMap, tap} from 'rxjs/operators';
+import {mergeMap, tap} from 'rxjs/operators';
 import {merge} from 'rxjs';
 import {KontoStore} from 'src/app/features/konto.module/store/konto.store';
 import {BuchungenService} from 'src/app/features/buchungen.module/services/buchungen.service';
