@@ -1,4 +1,6 @@
-export const environment: any = {
+import {BankingConfiguration} from 'src/app/configuration.module/bankingConfiguration';
+
+export const environment: { production: boolean, config: BankingConfiguration } = {
   production: true,
   config: {
     graphql: {
@@ -7,8 +9,3 @@ export const environment: any = {
   }
 };
 
-export interface Configuration {
-  graphql: {
-    api: string
-  };
-}

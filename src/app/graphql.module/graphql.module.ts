@@ -1,12 +1,13 @@
 import {NgModule} from '@angular/core';
-import {ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
-import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
+import {APOLLO_OPTIONS, ApolloModule} from 'apollo-angular';
+import {HttpLink, HttpLinkModule} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import {Configuration} from 'src/environments/environment';
+import {BankingConfiguration} from 'src/app/configuration.module/bankingConfiguration';
+import {CONFIG_PROVIDER_TOKEN} from 'src/app/configuration.module/configuration.module';
 
-export function createApollo(httpLink: HttpLink, config: string): {} {
+export function createApollo(httpLink: HttpLink, config: BankingConfiguration): {} {
   return {
-    link: httpLink.create({uri: config}),
+    link: httpLink.create({uri: config.graphql.api}),
     cache: new InMemoryCache(),
     defaultOptions: {
       watchQuery: {
@@ -27,7 +28,7 @@ export function createApollo(httpLink: HttpLink, config: string): {} {
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
-      deps: [HttpLink, 'GRAPHQL_PROVIDER_TOKEN'],
+      deps: [HttpLink, CONFIG_PROVIDER_TOKEN],
     },
   ],
 })
