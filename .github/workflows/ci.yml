@@ -8,7 +8,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Hello Action
-        uses: ./.github/actions/hello-world-docker-actions
+        uses: ./.github/actions/docker-actions
         with:
           imagename: banking-ui
           dockeruser: ${{ secrets.DOCKER_USERNAME }}

@@ -1,6 +1,6 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Docker'
+description: 'Build and publish docker images'
 inputs:
   imagename:
     description: 'Name of the created image'
