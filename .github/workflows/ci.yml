@@ -5,8 +5,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: ./.github/actions/docker-actions
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Build
+        uses: ./.github/actions/docker-actions
         with:
           imagename: banking-ui
           imagetag: feat/ci
