@@ -7,7 +7,6 @@ inputs:
     required: true
   imagetag:
     description: 'Tag of the created image, slashes will translate to dashes'
-    required: false
     default: latest
   dockeruser:
     description: 'Dockerhub user'
