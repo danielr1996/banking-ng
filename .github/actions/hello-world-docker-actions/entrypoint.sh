@@ -1,7 +1,6 @@
 #!/bin/sh -l
 
-echo "$"@
 pwd
 ls -la
-time=$(date)
+docker build -t danielr1996/banking-ui .
 echo ::set-output name=time::$time
