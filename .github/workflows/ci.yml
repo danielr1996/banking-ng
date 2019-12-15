@@ -8,15 +8,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Build
-        uses: ./.github/actions/docker-actions
+        uses: ./.github/actions/docker-action
         with:
           imagename: banking-ui
           imagetag: feat/ci
           dockeruser: ${{ secrets.DOCKER_USERNAME }}
           dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
-#      - name: Build Docker Image and Publish
-#        uses: HurricanKai/Publish-Docker-Github-Action@master
-#        with:
-#          name: danielr1996/banking-ui
-#          username: ${{ secrets.DOCKER_USERNAME }}
-#          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Deploy
+        uses: steebchen/kubectl@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: apply -f .
