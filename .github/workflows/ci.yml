@@ -5,10 +5,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Hello Action
-        uses: ./.github/actions/docker-actions
+      - uses: actions/checkout@v1
+      - uses: ./.github/actions/docker-actions
         with:
           imagename: banking-ui
           dockeruser: ${{ secrets.DOCKER_USERNAME }}
