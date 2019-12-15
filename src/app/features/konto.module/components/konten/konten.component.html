@@ -1,0 +1,86 @@
+<h1>Konten</h1>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Bankleitzahl</th>
+    <th>Bankaccount</th>
+    <th>Kontonummer</th>
+    <th>Tanmedium</th>
+    <th>Sicherheitsmechanismus</th>
+    <th>Aktiv</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let konto of konten$ | async">
+    <td>{{konto?.blz}}</td>
+    <td>{{konto?.bankaccount}}</td>
+    <td>{{konto?.kontonummer}}</td>
+    <td>{{konto?.tanmedia}}</td>
+    <td>{{konto?.secmech}}</td>
+    <td *ngIf="konto?.active"><i class="las la-check"></i></td>
+    <td *ngIf="!konto?.active"><i class="las la-times"></i></td>
+    <td>
+      <button (click)="delete$$.next(konto.id)"><i class="las la-trash"></i></button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<article>
+  <form [formGroup]="form">
+    <div class="form-row">
+      <div class="col form-group">
+        <label for="bankaccount">Bankaccount</label>
+        <input [formControlName]="'bankaccount'"
+               class="form-control"
+               [ngClass]="{hasError:  (formControlHasValidation(['bankaccount'],'error') | async)}"
+               id="bankaccount"
+               aria-describedby="help-bankaccount"
+               placeholder="064848">
+        <small id="help-bankaccount" class="form-text text-muted">Dein Onlinezugangsname bei deiner Bank.</small>
+      </div>
+      <div class="col form-group">
+        <label for="blz">Bankleitzahl</label>
+        <input [formControlName]="'blz'" class="form-control"
+               [ngClass]="{hasError:  (formControlHasValidation(['blz'],'error') | async)}"
+               id="blz" aria-describedby="help-blz"
+               placeholder="50010517">
+        <small id="help-blz" class="form-text text-muted">Die Bankleitzahl deines Kontos.</small>
+      </div>
+      <div class="col form-group">
+        <label for="kontonummer">Kontonummer</label>
+        <input [formControlName]="'kontonummer'" class="form-control" id="kontonummer"
+               [ngClass]="{hasError:  (formControlHasValidation(['kontonummer'],'error') | async)}"
+               aria-describedby="help-kontonummer"
+               placeholder="0648489890">
+        <small id="help-kontonummer" class="form-text text-muted">Die Kontonummer deines Kontos.</small>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col form-group">
+        <label for="password">Pin</label>
+        <input [formControlName]="'password'" class="form-control"
+               [ngClass]="{hasError:  (formControlHasValidation(['password'],'error') | async)}"
+               id="password" aria-describedby="help-password"
+               placeholder="1234">
+        <small id="help-password" class="form-text text-muted">Die Pin für dein Konto.</small>
+      </div>
+      <div class="col form-group">
+        <label for="secmech">Sicherheitsmechanismus</label>
+        <input [formControlName]="'secmech'" class="form-control"
+               [ngClass]="{hasWarning:  (formControlHasValidation(['secmech'],'warning') | async)}"
+               id="secmech" aria-describedby="help-secmech"
+               placeholder="921">
+        <small id="help-secmech" class="form-text text-muted">Der verwendete Sicherheitsmechanismus des Kontos.</small>
+      </div>
+      <div class="col form-group">
+        <label for="password">Tanmedium</label>
+        <input [formControlName]="'tanmedia'" class="form-control"
+               [ngClass]="{hasWarning:  (formControlHasValidation(['tanmedia'],'warning') | async)}"
+               id="tanmedia" aria-describedby="help-tanmedia"
+               placeholder="MeinSmartphone">
+        <small id="help-tanmedia" class="form-text text-muted">Das verwendete Tanmedium des Kontos.</small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="create$$.next()">Erstellen</button>
+  </form>
+</article>

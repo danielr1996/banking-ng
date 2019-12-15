@@ -1,8 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import 'chartist-plugin-tooltip';
-import 'chartist-plugin-pointlabels';
 import {Observable, zip} from 'rxjs';
-import {ChartEvent, ChartType} from 'ng-chartist';
 import {Buchung} from 'src/app/features/buchungen.module/model/buchung';
 import {Saldo} from 'src/app/features/saldo.module/model/saldo';
 import {map} from 'rxjs/operators';
@@ -18,34 +15,6 @@ export class CombinedChartComponent implements OnInit {
   @Input() saldi$: Observable<Saldo[]>;
 
   data$: Observable<{ labels: string[], series: string[][] }>;
-  chartType: ChartType = 'Bar';
-
-  options: any = {
-    stackBars: true,
-    axisX: {
-      showGrid: false
-    },
-    height: 250,
-    plugins: [
-      // Chartist.plugins.ctPointLabels(),
-    ]
-  };
-
-  events: ChartEvent = {
-    draw: (data: any): any => {
-      if (data.type === 'bar') {
-        data.element.animate({
-          y2: {
-            dur: '0.5s',
-            from: data.y1,
-            to: data.y2,
-            easing: 'easeOutQuad'
-          }
-        });
-      }
-    }
-  };
-
 
   constructor() {
   }

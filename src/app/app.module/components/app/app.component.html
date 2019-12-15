@@ -1,0 +1,43 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" [routerLink]="'/'">Banking</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <ng-container *ngIf="userQuery.isLoggedIn$ | async; else notLoggedIn">
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="'buchungen'">Buchungen</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="'saldi'" routerLinkActive #rla="routerLinkActive">Saldi</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="'combined'" routerLinkActive #rla="routerLinkActive">Kombiniert</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="'konten'" routerLinkActive #rla="routerLinkActive">Konten</a>
+          </li>
+        </ng-container>
+        <ng-template #notLoggedIn>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="['account','login']" routerLinkActive #rla="routerLinkActive">Anmelden</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" [routerLink]="['account','register']" routerLinkActive #rla="routerLinkActive">Registrieren</a>
+          </li>
+        </ng-template>
+      </ul>
+      <ng-container *ngIf="userQuery.isLoggedIn$ | async">
+<!--        <app-konto-selection class="margin-right-10"></app-konto-selection>-->
+        <app-logout></app-logout>
+        <app-saldo></app-saldo>
+        <app-refresh></app-refresh>
+      </ng-container>
+    </div>
+  </nav>
+  <router-outlet></router-outlet>
+</div>

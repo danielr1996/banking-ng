@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {DashboardComponent} from 'src/app/app.module/dashboard/dashboard.component';
+import {DashboardComponent} from 'src/app/app.module/components/dashboard/dashboard.component';
 import {IsLoggedInGuard} from 'src/app/features/account.module/guards/is-logged-in.guard';
 
 @NgModule({
@@ -21,6 +21,10 @@ import {IsLoggedInGuard} from 'src/app/features/account.module/guards/is-logged-
       {
         path: 'account',
         loadChildren: () => import('../features/account.module/account.module').then(m => m.AccountModule)
+      },
+      {
+        path: 'konten',
+        loadChildren: () => import('../features/konto.module/konto.module').then(m => m.KontoModule)
       },
       {
         path: '', children: [

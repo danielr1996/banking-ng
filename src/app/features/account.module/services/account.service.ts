@@ -14,10 +14,11 @@ export class AccountService {
   }
 
   public register(username: string, password: string): Observable<{ id: string, name: string }> {
+    password = btoa(password);
     return this.apollo
-      .mutate({
-        mutation: gql`
-            mutation{
+      .query({
+        query: gql`
+            query{
               createUser(user: {
                 name: "${username}"
                 password: "${password}"
