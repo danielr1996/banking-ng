@@ -2,10 +2,19 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  imagename:
+    description: 'Name of the created image'
     required: true
-    default: 'World'
+  imagetag:
+    description: 'Tag of the created image, slashes will translate to dashes'
+    required: true
+    default: latest
+  dockeruser:
+    description: 'Dockerhub user'
+    required: true
+  dockerpassword:
+    description: 'Dockerhub pasword'
+    required: true
 outputs:
   time: # id of output
     description: 'The time we greeted you'

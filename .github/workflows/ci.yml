@@ -10,7 +10,9 @@ jobs:
       - name: Hello Action
         uses: ./.github/actions/hello-world-docker-actions
         with:
-          who-to-greet: 'Daniel Richter'
+          imagename: banking-ui
+          dockeruser: ${{ secrets.DOCKER_USERNAME }}
+          dockerpassword: ${{ secrets.DOCKER_USERNAME }}
 #      - name: Build Docker Image and Publish
 #        uses: HurricanKai/Publish-Docker-Github-Action@master
 #        with:
