@@ -10,7 +10,7 @@ jobs:
         with:
           imagename: banking-ui
           dockeruser: ${{ secrets.DOCKER_USERNAME }}
-          dockerpassword: ${{ secrets.DOCKER_USERNAME }}
+          dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
 #      - name: Build Docker Image and Publish
 #        uses: HurricanKai/Publish-Docker-Github-Action@master
 #        with:
