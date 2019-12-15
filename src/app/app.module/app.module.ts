@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 
 import {environment} from 'src/environments/environment';
 import {AppRoutingModule} from 'src/app/app.module/app-routing.module';
@@ -13,6 +13,8 @@ import {SaldoModule} from 'src/app/features/saldo.module/saldo.module';
 import {KontoModule} from 'src/app/features/konto.module/konto.module';
 import {AccountModule} from 'src/app/features/account.module/account.module';
 import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
+
+export const CONFIG_PROVIDER_TOKEN: string = 'CONFIG_PROVIDER_TOKEN';
 
 @NgModule({
   declarations: [
@@ -31,8 +33,13 @@ import {AkitaNgDevtools} from '@datorama/akita-ngdevtools';
     AccountModule,
     environment.production ? [] : AkitaNgDevtools.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {provide: CONFIG_PROVIDER_TOKEN, useValue: environment.config},
+    {provide: 'GRAPHQL_PROVIDER_TOKEN', useValue: environment.config.graphql.api},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor() {
+  }
 }

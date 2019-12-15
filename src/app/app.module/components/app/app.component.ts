@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {UserQuery} from 'src/app/features/account.module/store/user.store';
 import {KontoService} from 'src/app/features/konto.module/services/konto.service';
 import {mergeMap, tap} from 'rxjs/operators';

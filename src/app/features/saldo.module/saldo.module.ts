@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ChartistModule} from 'ng-chartist';
+// import {ChartistModule} from 'ng-chartist';
 import {SaldiSmartComponent} from 'src/app/features/saldo.module/components/saldi-smart/saldi-smart.component';
 import {SaldoComponent} from 'src/app/features/saldo.module/components/saldo/saldo.component';
 import {SaldiChartComponent} from 'src/app/features/saldo.module/components/saldi-chart/saldi-chart.component';
@@ -19,7 +19,6 @@ import { SaldoPipe } from './pipes/saldo.pipe';
     SaldoPipe],
   imports: [
     CommonModule,
-    ChartistModule,
     SaldoRoutingModule
   ],
   exports: [

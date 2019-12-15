@@ -11,13 +11,6 @@ import {KontoStore} from 'src/app/features/konto.module/store/konto.store';
 import {SaldoStore} from 'src/app/features/saldo.module/store/saldo.store';
 import {BuchungenStore} from 'src/app/features/buchungen.module/store/buchungen.store';
 
-// FIXME
-(window as any).global = window;
-(window as any).process = window;
-(window as any).Buffer = window;
-(window as any).process.browser = true;
-(window as any).process.version = '';
-(window as any).process.versions = {node: false};
 
 @Component({
   selector: 'app-refresh',
@@ -56,6 +49,8 @@ export class RefreshComponent implements OnInit {
     this.refresh$.subscribe();
 
     // FIXME
+// FIXME
+
     const autobahn: any = require('autobahn');
     const connection: any = new autobahn.Connection({url: 'ws://127.0.0.1:9090/wamp', realm: 'default'});
     connection.onopen = (session: any): void => {
