@@ -8,7 +8,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
       - name: Hello Action
-        uses: actions/hello-world-docker-actions
+        uses: ./.github/actions/hello-world-docker-actions
         with:
           who-to-greet: 'Daniel Richter'
 #      - name: Build Docker Image and Publish
