@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {ChartistModule} from 'ng-chartist';
 import {CommonsModule} from 'src/app/commons.module/commons.module';
 import {BuchungenRoutingModule} from 'src/app/features/buchungen.module/buchungen-routing.module';
 import {BuchungenTableComponent} from 'src/app/features/buchungen.module/components/buchungen-table/buchungen-table.component';
@@ -9,7 +8,7 @@ import {BuchungenComponent} from 'src/app/features/buchungen.module/components/b
 
 @NgModule({
   imports: [
-    CommonsModule, ChartistModule, BuchungenRoutingModule
+    CommonsModule, BuchungenRoutingModule
   ],
   exports: [
     // BuchungenComponent

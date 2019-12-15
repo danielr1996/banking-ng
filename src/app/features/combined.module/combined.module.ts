@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {ChartistModule} from 'ng-chartist';
 import {CombinedSmartComponent} from 'src/app/features/combined.module/components/combined-smart/combined-smart.component';
 import {CombinedTableComponent} from 'src/app/features/combined.module/components/combined-table/combined-table.component';
 import {CombinedChartComponent} from 'src/app/features/combined.module/components/combined-chart/combined-chart.component';
@@ -16,7 +15,6 @@ import {CombinedRoutingModule} from 'src/app/features/combined.module/components
   ],
   imports: [
     CommonsModule,
-    ChartistModule,
     CombinedRoutingModule
   ],
   exports: [
