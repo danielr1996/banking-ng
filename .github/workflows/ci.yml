@@ -9,6 +9,7 @@ jobs:
       - uses: ./.github/actions/docker-actions
         with:
           imagename: banking-ui
+          imagetag: feat/ci
           dockeruser: ${{ secrets.DOCKER_USERNAME }}
           dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
 #      - name: Build Docker Image and Publish
