@@ -14,9 +14,6 @@ inputs:
   dockerpassword:
     description: 'Dockerhub pasword'
     required: true
-  secret:
-    description: 'Dockerhub pasword'
-    required: true
 outputs:
   time: # id of output
     description: 'The time we greeted you'
