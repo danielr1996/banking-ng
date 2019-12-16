@@ -1,0 +1,9 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: banking-ui
+  labels:
+    app.kubernetes.io/instance: banking-ui
+    app.kubernetes.io/version: banking-ui-2.3.0
+    app.kubernetes.io/managed-by: kustomize
+---
