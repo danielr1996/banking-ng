@@ -7,11 +7,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      - name: Extract branch name
+          shell: bash
+          run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          id: extract_branch
       - name: Build
         uses: ./.github/actions/docker-action
         with:
           imagename: danielr1996/banking-ui
-          imagetag: ${{ github.ref }}
+          imagetag: ${{ extract_branch.outputs.branch }}
           dockeruser: ${{ secrets.DOCKER_USERNAME }}
           dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
       - name: Deploy
