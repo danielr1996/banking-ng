@@ -18,6 +18,3 @@ docker build -t $INPUT_IMAGENAME:$INPUT_IMAGETAG .
 
 # Push
 docker push $INPUT_IMAGENAME:$INPUT_IMAGETAG
-
-# Return useful information
-echo ::set-output name=time::$time
