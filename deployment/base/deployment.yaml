@@ -3,9 +3,12 @@ kind: Service
 metadata:
   name: banking-ui
   labels:
-    app.kubernetes.io/name: banking-ui-service
+    app.kubernetes.io/name: banking-ui
+    app.kubernetes.io/instance: banking-ui-REPLACE_ENV
+    app.kubernetes.io/version: banking-ui-REPLACE_VERSION
     app.kubernetes.io/component: Service
     app.kubernetes.io/part-of: banking
+    app.kubernetes.io/managed-by: kustomize
 spec:
   type: ClusterIP
   selector:
@@ -20,9 +23,12 @@ kind: Deployment
 metadata:
   name: banking-ui
   labels:
-    app.kubernetes.io/name: banking-ui-deployment
+    app.kubernetes.io/name: banking-ui
+    app.kubernetes.io/instance: banking-ui-REPLACE_ENV
+    app.kubernetes.io/version: banking-ui-REPLACE_VERSION
     app.kubernetes.io/component: Frontend
     app.kubernetes.io/part-of: banking
+    app.kubernetes.io/managed-by: kustomize
 spec:
   replicas: 1
   selector:
@@ -32,9 +38,12 @@ spec:
     metadata:
       labels:
         app: banking-ui
-        app.kubernetes.io/name: banking-ui-replicaset
+        app.kubernetes.io/name: banking-ui
+        app.kubernetes.io/instance: banking-ui-REPLACE_ENV
+        app.kubernetes.io/version: banking-ui-REPLACE_VERSION
         app.kubernetes.io/component: ReplicaSet
         app.kubernetes.io/part-of: banking-ui
+        app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
         - name: banking-ui
@@ -42,7 +51,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: GRAPHQL_API
-              value: http://api.banking.danielr1996.de/graphql
+              value: http://example.com/graphql
           ports:
             - containerPort: 80
 ---
@@ -52,9 +61,12 @@ kind: Ingress
 metadata:
   name: banking-ui
   labels:
-    app.kubernetes.io/name: banking-ui-ingress
+    app.kubernetes.io/name: banking-ui
+    app.kubernetes.io/instance: banking-ui-REPLACE_ENV
+    app.kubernetes.io/version: banking-ui-REPLACE_VERSION
     app.kubernetes.io/component: Ingress
     app.kubernetes.io/part-of: banking
+    app.kubernetes.io/managed-by: kustomize
 spec:
   rules:
     - host: banking.danielr1996.de
