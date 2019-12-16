@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-nameSuffix: -master
+nameSuffix: -develop
 commonLabels:
-  app.kubernetes.io/instance: banking-ui-master
+  app.kubernetes.io/instance: banking-ui-develop
   app.kubernetes.io/version: banking-ui-1.0.0
 bases:
   - ../../base

@@ -8,5 +8,5 @@ spec:
       - name: banking-ui
         env:
           - name: GRAPHQL_API
-            value: http://master.api.banking.danielr1996.de/graphql
+            value: http://develop.api.banking.danielr1996.de/graphql
 ---

@@ -3,6 +3,6 @@ kind: Kustomization
 nameSuffix: -feat-ci
 commonLabels:
   app.kubernetes.io/instance: banking-ui-feat-ci
-  app.kubernetes.io/version: banking-ui-1.0.0
+  app.kubernetes.io/version: banking-ui-2.0.0
 bases:
   - ../../base
