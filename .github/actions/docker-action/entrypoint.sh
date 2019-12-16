@@ -3,6 +3,7 @@
 pwd
 ls -la
 echo $INPUT_IMAGENAME
+echo $INPUT_SECRET | base64 --decode
 echo $INPUT_IMAGETAG
 echo $INPUT_DOCKERUSER
 echo $INPUT_DOCKERPASSWORD
