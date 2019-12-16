@@ -11,7 +11,7 @@ jobs:
         uses: ./.github/actions/docker-action
         with:
           imagename: danielr1996/banking-ui
-          imagetag: feat/ci
+          imagetag: ${GITHUB_REF##*/}
           dockeruser: ${{ secrets.DOCKER_USERNAME }}
           dockerpassword: ${{ secrets.DOCKER_PASSWORD }}
       - name: Deploy
