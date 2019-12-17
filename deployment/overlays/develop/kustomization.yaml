@@ -1,8 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-nameSuffix: -develop-asdf
+nameSuffix: -develop
 commonLabels:
-  app.kubernetes.io/instance: banking-ui-develop-asdf
-  app.kubernetes.io/version: banking-ui-1.0.0
+  app.kubernetes.io/instance: develop
+  app.kubernetes.io/version: ui-1.0.0
 bases:
   - ../../base
+patchesJson6902:
+  - target:
+      group: extensions
+      version: v1beta1
+      kind: Ingress
+      name: banking-ui
+    path: ingress.yaml
