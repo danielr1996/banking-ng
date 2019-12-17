@@ -1,4 +1,3 @@
-# action.yml
 name: 'Docker'
 description: 'Build and publish docker images'
 inputs:
@@ -15,7 +14,7 @@ inputs:
     description: 'Dockerhub pasword'
     required: true
 outputs:
-  time: # id of output
+  time:
     description: 'The time we greeted you'
 runs:
   using: 'docker'
