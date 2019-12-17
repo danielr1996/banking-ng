@@ -13,16 +13,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: banking-ui
+      app.kubernetes.io/instance: banking-ui-REPLACE_ENV
   template:
     metadata:
       labels:
-        app: banking-ui
         app.kubernetes.io/name: banking-ui
         app.kubernetes.io/instance: banking-ui-REPLACE_ENV
         app.kubernetes.io/version: banking-ui-REPLACE_VERSION
-        app.kubernetes.io/component: ReplicaSet
-        app.kubernetes.io/part-of: banking-ui
+        app.kubernetes.io/component: Pod
+        app.kubernetes.io/part-of: banking
         app.kubernetes.io/managed-by: kustomize
     spec:
       containers:
