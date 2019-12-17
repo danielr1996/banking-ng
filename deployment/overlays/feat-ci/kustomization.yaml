@@ -6,3 +6,10 @@ commonLabels:
   app.kubernetes.io/version: banking-ui-2.0.0
 bases:
   - ../../base
+patchesJson6902:
+  - target:
+      group: extensions
+      version: v1beta1
+      kind: Ingress
+      name: banking-ui
+    path: patch.yaml

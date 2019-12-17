@@ -8,5 +8,5 @@ spec:
       - name: banking-ui
         env:
           - name: GRAPHQL_API
-            value: http://feat-ci.yaml.api.banking.danielr1996.de/graphql
+            value: http://feat-ci.api.banking.danielr1996.de/graphql
 ---

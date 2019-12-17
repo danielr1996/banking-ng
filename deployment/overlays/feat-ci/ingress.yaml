@@ -4,5 +4,5 @@ metadata:
   name: banking-ui
 spec:
   rules:
-    - host: feat-ci.yaml.banking.danielr1996.de
+    - host: feat-ci.banking.danielr1996.de
 ---
