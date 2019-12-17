@@ -1,8 +1,3 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: banking-ui
-spec:
-  rules:
-    - host: develop.banking.danielr1996.de
----
+- op: replace
+  path: /spec/rules/0/host
+  value: develop.banking.danielr1996.de
