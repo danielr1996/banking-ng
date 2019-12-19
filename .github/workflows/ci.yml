@@ -12,8 +12,9 @@ jobs:
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/} | tr / -)"
         id: sanitize
       - name: Build
-        uses: ./.github/actions/docker-action
+        uses: ./.github/actions/docker-ui
         with:
+          # TODO: Use Github User and Repository Name
           imagename: danielr1996/banking-ui
           imagetag: ${{ steps.sanitize.outputs.branch }}
           dockeruser: ${{ secrets.DOCKER_USERNAME }}
