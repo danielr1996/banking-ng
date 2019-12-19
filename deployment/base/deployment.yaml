@@ -13,7 +13,9 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/instance: banking-ui-REPLACE_ENV
+      app.kubernetes.io/name: banking-ui
+      app.kubernetes.io/instance: REPLACE_ENV
+      app.kubernetes.io/version: REPLACE_VERSION
   template:
     metadata:
       labels:
