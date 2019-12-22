@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banking-ui
+  labels:
+    app.kubernetes.io/name: banking-ui
+    app.kubernetes.io/instance: REPLACE_ENV
+    app.kubernetes.io/version: REPLACE_VERSION
+    app.kubernetes.io/component: Frontend
+    app.kubernetes.io/part-of: banking
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: banking-ui
+      app.kubernetes.io/instance: REPLACE_ENV
+      app.kubernetes.io/version: REPLACE_VERSION
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: banking-ui
+        app.kubernetes.io/instance: REPLACE_ENV
+        app.kubernetes.io/version: REPLACE_VERSION
+        app.kubernetes.io/component: Pod
+        app.kubernetes.io/part-of: banking
+        app.kubernetes.io/managed-by: kustomize
+    spec:
+      containers:
+        - name: banking-ui
+          image: danielr1996/banking-ui
+          imagePullPolicy: Always
+          env:
+            - name: GRAPHQL_API
+              value: http://example.com/graphql
+          ports:
+            - containerPort: 80
+---
+
