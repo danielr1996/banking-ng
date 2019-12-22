@@ -3,10 +3,11 @@ kind: Deployment
 metadata:
   name: banking-ui
 spec:
-  spec:
-    containers:
-      - name: banking-ui
-        env:
-          - name: GRAPHQL_API
-            value: http://develop.api.banking.danielr1996.de/graphql
+  template:
+    spec:
+      containers:
+        - name: banking-ui
+          env:
+            - name: GRAPHQL_API
+              value: http://develop.api.banking.danielr1996.de/graphql
 ---
