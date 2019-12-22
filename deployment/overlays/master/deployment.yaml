@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: banking-ui
+spec:
+  template:
+    spec:
+      containers:
+        - name: banking-ui
+          env:
+            - name: GRAPHQL_API
+              value: http://master.api.banking.danielr1996.de/graphql
+---
