@@ -5,7 +5,6 @@ bases:
 nameSuffix: -${INSTANCE}
 commonLabels:
   app.kubernetes.io/instance: ${INSTANCE}
-  app.kubernetes.io/version: ${VERSION}
 patchesStrategicMerge:
   - deployment.yaml
 patchesJson6902:
