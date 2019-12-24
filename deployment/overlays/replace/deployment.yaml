@@ -7,6 +7,7 @@ spec:
     spec:
       containers:
         - name: banking-ui
+          image: danielr1996/banking-ui:${VERSION}
           env:
             - name: GRAPHQL_API
               value: http://${INSTANCE}.api.banking.danielr1996.de/graphql
